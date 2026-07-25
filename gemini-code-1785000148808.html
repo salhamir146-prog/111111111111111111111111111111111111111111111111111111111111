@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلای معتمدی | خرید، فروش و پس‌انداز آنلاین طلای آب‌شده و مصنوعات</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Vazirmatn Font -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            50: '#FAF8F0',
+                            100: '#F5F0D8',
+                            200: '#EADFA9',
+                            300: '#E6CB78',
+                            400: '#DFB752',
+                            500: '#D4AF37',
+                            600: '#B8860B',
+                            700: '#8B6508',
+                            800: '#634704',
+                            900: '#3D2B02',
+                        },
+                        darkGold: '#1F1A0A',
+                    },
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #FAF9F5;
+            color: #1F2937;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
+        }
+        .gold-gradient-soft {
+            background: linear-gradient(135deg, #fefce8 0%, #fffbeb 50%, #fef3c7 100%);
+        }
+        .gold-border {
+            border-image: linear-gradient(to right, #D4AF37, #FFDF73, #B8860B) 1;
+        }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(14px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Range slider customization */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            background: #B8860B;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(184, 134, 11, 0.5);
+        }
+    </style>
+</head>
+<body class="pb-24 lg:pb-0 min-h-screen flex flex-col justify-between selection:bg-gold-500 selection:text-white">
+
+    <!-- Top Live Gold Ticker -->
+    <div class="bg-gray-950 text-gold-300 text-xs py-2 px-4 flex justify-between items-center border-b border-gold-600/30 sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <span class="flex items-center gap-1.5 font-bold">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping inline-block"></span>
+                قیمت زنده طلا (۱۸ عیار):
+            </span>
+            <span id="ticker-price" class="font-bold text-white text-sm">۴,۸۵۰,۰۰۰ تومان</span>
+            <span id="ticker-change" class="text-emerald-400 font-bold text-[11px] bg-emerald-950/80 px-2 py-0.5 rounded-md border border-emerald-800/50">(+۱.۲%) 📈</span>
+        </div>
+        <div class="hidden sm:flex items-center gap-5 text-gray-300">
+            <span>مظنه تهران: <strong class="text-white" id="ticker-mazne">۲۱,۰۰۰,۰۰۰</strong></span>
+            <span>انس جهانی: <strong class="text-white">$۲,۴۱۰</strong></span>
+            <span class="text-gold-400 font-semibold"><i class="fa-solid fa-clock ml-1"></i> به‌روزرسانی آنی</span>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="glass-header sticky top-8 z-40 border-b border-gray-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
+                <div class="w-12 h-12 rounded-2xl gold-gradient p-[2px] shadow-md flex items-center justify-center">
+                    <div class="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
+                        <i class="fa-solid fa-gem text-gold-600 text-xl"></i>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="text-xl font-black tracking-tight text-gray-900">طلای معتمدی</h1>
+                    <p class="text-[10px] text-gold-600 font-bold tracking-wide">پلتفرم هوشمند پس‌انداز و خرید طلا</p>
+                </div>
+            </div>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden lg:flex items-center gap-7 font-medium text-sm text-gray-700">
+                <button onclick="switchTab('home')" class="nav-btn transition hover:text-gold-600 font-bold text-gold-600" data-tab="home">خانه</button>
+                <button onclick="switchTab('live-price')" class="nav-btn transition hover:text-gold-600" data-tab="live-price">نمودار قیمت لحظه‌ای</button>
+                <button onclick="switchTab('piggy-bank')" class="nav-btn transition hover:text-gold-600 flex items-center gap-1.5" data-tab="piggy-bank">
+                    <i class="fa-solid fa-piggy-bank text-gold-500"></i>
+                    قلک طلا
+                </button>
+                <button onclick="switchTab('shop')" class="nav-btn transition hover:text-gold-600" data-tab="shop">خرید طلا (ویترین)</button>
+                <button onclick="switchTab('invite')" class="nav-btn transition hover:text-gold-600" data-tab="invite">دعوت از دوستان</button>
+                <button onclick="switchTab('about')" class="nav-btn transition hover:text-gold-600" data-tab="about">درباره ما</button>
+                <button id="admin-nav-link" onclick="switchTab('admin')" class="hidden nav-btn text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg font-bold border border-red-200 hover:bg-red-100 transition" data-tab="admin">
+                    <i class="fa-solid fa-user-shield ml-1"></i> پنل مدیریت
+                </button>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-3">
+                <button onclick="switchTab('cart')" class="relative p-2.5 rounded-xl bg-gray-50 hover:bg-gold-50 text-gray-700 hover:text-gold-600 transition border border-gray-200/80">
+                    <i class="fa-solid fa-bag-shopping text-lg"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-gold-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold shadow-sm">۰</span>
+                </button>
+
+                <div id="user-auth-btn-container">
+                    <button onclick="openLoginModal()" class="gold-gradient text-gray-950 font-black px-5 py-2.5 rounded-xl text-sm shadow-md hover:shadow-lg transition transform active:scale-95">
+                        ورود / ثبت‌نام
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-12">
+
+        <!-- ==================== PAGE 1: HOME (MASSIVELY EXPANDED) ==================== -->
+        <section id="page-home" class="tab-content space-y-16">
+            
+            <!-- 1. Hero Banner Section -->
+            <div class="relative rounded-3xl overflow-hidden gold-gradient p-1 shadow-2xl">
+                <div class="bg-gradient-to-r from-gray-950 via-gray-900 to-gray-800 text-white rounded-[22px] p-8 sm:p-12 lg:p-16 relative overflow-hidden">
+                    <div class="absolute -left-10 -bottom-10 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+                    <div class="max-w-3xl space-y-6 relative z-10">
+                        <div class="inline-flex items-center gap-2 bg-gold-500/20 text-gold-300 border border-gold-500/40 px-4 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md">
+                            <i class="fa-solid fa-shield-halved text-gold-400"></i>
+                            تحت نظارت اتحادیه طلا و جواهر و دارای نماد اعتماد الکترونیکی
+                        </div>
+
+                        <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight">
+                            حفظ ارزش سرمایه با <br class="hidden sm:inline"/>
+                            <span class="text-transparent bg-clip-text gold-gradient">خرید آنلاین طلای آب‌شده</span>
+                        </h2>
+
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed font-normal">
+                            در «طلای معتمدی» می‌توانید هر زمان که خواستید، حتی با کمترین بودجه (از ۵۰ هزار تومان یا ۱ صوت) طلای آب‌شده ۲۴ عیار بدون اجرت بپذیرید، رشد لحظه‌ای دارایی‌تان را مشاهده کنید و هر وقت مایل بودید آن را تحویل بگیرید یا تبدیل به زیورآلات کنید.
+                        </p>
+
+                        <!-- Hero Stats Metrics -->
+                        <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/10 max-w-lg">
+                            <div>
+                                <span class="text-xl sm:text-2xl font-black text-gold-300 block">+۵۰,۰۰۰</span>
+                                <span class="text-[11px] text-gray-400">کاربر فعال</span>
+                            </div>
+                            <div>
+                                <span class="text-xl sm:text-2xl font-black text-gold-300 block">+۱۵۰ کیلو</span>
+                                <span class="text-[11px] text-gray-400">طلای معامله‌شده</span>
+                            </div>
+                            <div>
+                                <span class="text-xl sm:text-2xl font-black text-gold-300 block">۱۰۰٪</span>
+                                <span class="text-[11px] text-gray-400">ضمانت اصالت عیار</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-4 pt-2">
+                            <button onclick="switchTab('piggy-bank')" class="gold-gradient text-gray-950 font-black px-8 py-4 rounded-2xl shadow-xl hover:opacity-95 transition flex items-center gap-2 text-sm sm:text-base transform active:scale-95">
+                                <i class="fa-solid fa-vault"></i>
+                                ورود به قلک طلا و خرید
+                            </button>
+                            <button onclick="switchTab('shop')" class="bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold px-7 py-4 rounded-2xl hover:bg-white/20 transition text-sm sm:text-base">
+                                <i class="fa-solid fa-store ml-2"></i>
+                                ویترین محصولات
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Live Market Quick Overview Grid -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-end">
+                    <div>
+                        <h3 class="text-xl font-black text-gray-900">وضعیت زنده تابلو طلا و سکه</h3>
+                        <p class="text-xs text-gray-500 mt-1">نرخ‌های رسمی اتاق مبادلات تهران</p>
+                    </div>
+                    <button onclick="switchTab('live-price')" class="text-xs font-bold text-gold-700 hover:underline flex items-center gap-1">
+                        مشاهده نمودار کامل <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-white p-5 rounded-2xl border border-gold-200/80 shadow-sm space-y-2">
+                        <span class="text-xs font-bold text-gray-500 block">طلای ۱۸ عیار (گرم)</span>
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-lg font-black text-gray-900">۴,۸۵۰,۰۰۰</span>
+                            <span class="text-xs font-bold text-emerald-600">+۱.۲% ⬆</span>
+                        </div>
+                        <span class="text-[10px] text-gray-400 block">تومان</span>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-gold-200/80 shadow-sm space-y-2">
+                        <span class="text-xs font-bold text-gray-500 block">طلای ۲۴ عیار (گرم)</span>
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-lg font-black text-gray-900">۶,۴۶۰,۰۰۰</span>
+                            <span class="text-xs font-bold text-emerald-600">+۱.۱% ⬆</span>
+                        </div>
+                        <span class="text-[10px] text-gray-400 block">تومان</span>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-gold-200/80 shadow-sm space-y-2">
+                        <span class="text-xs font-bold text-gray-500 block">مظنه طلا (مثقال)</span>
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-lg font-black text-gray-900">۲۱,۰۰۰,۰۰۰</span>
+                            <span class="text-xs font-bold text-emerald-600">+۰.۹% ⬆</span>
+                        </div>
+                        <span class="text-[10px] text-gray-400 block">تومان</span>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-gold-200/80 shadow-sm space-y-2">
+                        <span class="text-xs font-bold text-gray-500 block">سکه امامی طرح جدید</span>
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-lg font-black text-gray-900">۵۲,۳۰۰,۰۰۰</span>
+                            <span class="text-xs font-bold text-red-500">-۰.۴% ⬇</span>
+                        </div>
+                        <span class="text-[10px] text-gray-400 block">تومان</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Interactive Gold Savings Calculator -->
+            <div class="bg-white p-6 sm:p-10 rounded-3xl border border-gold-200/80 shadow-sm space-y-8">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <span class="text-xs font-bold text-gold-600 bg-gold-50 px-3 py-1 rounded-full border border-gold-200">پیش‌بینی هوشمند پس‌انداز</span>
+                    <h3 class="text-2xl font-black text-gray-900">اگر ماهانه طلا بخرید، در آینده چقدر دارایی دارید؟</h3>
+                    <p class="text-xs text-gray-500">با تغییر اسلایدر زیر، پس‌انداز ماهانه خود را مشخص کنید تا معادل طلایی و ارزش تقریبی آن محاسبه شود.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-gold-50/50 p-6 rounded-2xl border border-gold-100">
+                    <!-- Controls -->
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between text-sm font-bold text-gray-800 mb-2">
+                                <span>مبلغ پس‌انداز ماهانه شما:</span>
+                                <span id="calc-monthly-label" class="text-gold-700 font-black">۲,۰۰۰,۰۰۰ تومان</span>
+                            </div>
+                            <input id="calc-range" type="range" min="100000" max="20000000" step="100000" value="2000000" oninput="updateHomeSavingsCalculator()" class="w-full h-2 bg-gold-200 rounded-lg appearance-none cursor-pointer">
+                            <div class="flex justify-between text-[10px] text-gray-400 mt-1 font-bold">
+                                <span>۱۰۰ هزار تومان</span>
+                                <span>۲۰ میلیون تومان</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-gray-200 space-y-3">
+                            <div class="flex justify-between text-xs text-gray-600">
+                                <span>طلای پس‌انداز شده در هر ماه:</span>
+                                <strong id="calc-monthly-gold" class="text-gray-900 font-bold">۰.۴۱۲ گرم</strong>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-600 border-t border-gray-100 pt-2">
+                                <span>مجموع طلا در پایان ۱ سال:</span>
+                                <strong id="calc-yearly-gold" class="text-gold-600 font-bold">۴.948 گرم</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Output Forecast Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded-xl border border-gold-200 text-center space-y-2 shadow-sm">
+                            <span class="text-[11px] font-bold text-gray-500 block">افق ۱ ساله</span>
+                            <span id="calc-res-1y" class="text-base font-black text-gray-900 block">۴.۹ گرم</span>
+                            <span class="text-[10px] text-emerald-600 font-bold block">رشد مطمئن</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-gold-200 text-center space-y-2 shadow-sm">
+                            <span class="text-[11px] font-bold text-gray-500 block">افق ۳ ساله</span>
+                            <span id="calc-res-3y" class="text-base font-black text-gray-900 block">۱۴.۸ گرم</span>
+                            <span class="text-[10px] text-emerald-600 font-bold block">پوشش تورم عالی</span>
+                        </div>
+                        <div class="bg-gold-500 text-white p-4 rounded-xl text-center space-y-2 shadow-md">
+                            <span class="text-[11px] font-bold text-gold-100 block">افق ۵ ساله</span>
+                            <span id="calc-res-5y" class="text-base font-black text-white block">۲۴.۷ گرم</span>
+                            <span class="text-[10px] text-gold-200 font-bold block">استقلال مالی</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Why Choose Motamedi Gold? (6 Value Cards) -->
+            <div class="space-y-8">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <h3 class="text-2xl font-black text-gray-900">چرا سرمایه‌گذاری در طلای معتمدی؟</h3>
+                    <p class="text-xs text-gray-500">مزایای منحصر‌به‌فردی که ما را به انتخاب اول خریداران طلا تبدیل کرده است.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-2xl border border-gold-100 shadow-sm hover:shadow-md transition space-y-3">
+                        <div class="w-12 h-12 bg-gold-50 rounded-2xl flex items-center justify-center text-gold-600 text-xl font-bold">
+                            <i class="fa-solid fa-stamp"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 text-base">ضمانت اصالت عیار (۷۵۰)</h4>
+                        <p class="text-gray-500 text-xs leading-relaxed">تمامی طلای ارائه شده دارای انگ و آزمایشگاهی معتبر ریگیری بوده و همراه با فاکتور رسمی صادر می‌شود.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-gold-100 shadow-sm hover:shadow-md transition space-y-3">
+                        <div class="w-12 h-12 bg-gold-50 rounded-2xl flex items-center justify-center text-gold-600 text-xl font-bold">
+                            <i class="fa-solid fa-percent"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 text-base">خرید بدون اجرت و مالیات</h4>
+                        <p class="text-gray-500 text-xs leading-relaxed">در بخش قلک طلا، شما فقط پول اصل طلا را می‌پردازید و هیچ اجرت یا مالیات اضافی پرداخت نمی‌کنید.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-gold-100 shadow-sm hover:shadow-md transition space-y-3">
+                        <div class="w-12 h-12 bg-gold-50 rounded-2xl flex items-center justify-center text-gold-600 text-xl font-bold">
+                            <i class="fa-solid fa-rotate-left"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 text-base">نقدشوندگی و بازخرید آنی</h4>
+                        <p class="text-gray-500 text-xs leading-relaxed">هر لحظه که بخواهید می‌توانید موجودی طلای خود را با قیمت زنده روز به پول نقد تبدیل کرده و در حساب بگیرید.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-gold-100 shadow-sm hover:shadow-md transition space-y-3">
+                        <div class="w-12 h-12 bg-gold-50 rounded-2xl flex items-center justify-center text-gold-600 text-xl font-bold">
+                            <i class="fa-solid fa-box-archive"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 text-base">امکان تحویل فیزیکی شمش</h4>
+                        <p class="text-gray-500 text-xs leading-relaxed">هر زمان طلای پس‌انداز شده شما به حد نصاب برسد، می‌توانید آن را به صورت شمش استاندارد تحویل بگیرید.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-gold-100 shadow-sm hover:shadow-md transition space-y-3">
+                        <div class="w-12 h-12 bg-gold-50 rounded-2xl flex items-center justify-center text-gold-600 text-xl font-bold">
+                            <i class="fa-solid fa-arrows-repeat"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 text-base">تبدیل طلا به سرویس و زیورآلات</h4>
+                        <p class="text-gray-500 text-xs leading-relaxed">طلای آب‌شده خود را بدون دغدغه و مستقیم با هر کدام از محصولات ویترین فروشگاه تعویض کنید.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-gold-100 shadow-sm hover:shadow-md transition space-y-3">
+                        <div class="w-12 h-12 bg-gold-50 rounded-2xl flex items-center justify-center text-gold-600 text-xl font-bold">
+                            <i class="fa-solid fa-shield-cat"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 text-base">امنیت و پشتیبانی اختصاصی</h4>
+                        <p class="text-gray-500 text-xs leading-relaxed">اطلاعات شما با بالاترین پروتکل‌های امنیتی محافظت شده و پشتیبانی مستقیم ادمین پاسخگوی شماست.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. How It Works (4 Simple Steps) -->
+            <div class="bg-gradient-to-br from-gray-900 to-gray-950 text-white p-8 sm:p-12 rounded-3xl space-y-10 shadow-xl">
+                <div class="text-center max-w-xl mx-auto space-y-2">
+                    <span class="text-gold-400 text-xs font-bold">چگونه شروع کنیم؟</span>
+                    <h3 class="text-2xl font-black">۴ گام ساده تا ساخت قلک طلایی شما</h3>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10 space-y-3 relative">
+                        <span class="w-8 h-8 rounded-full bg-gold-500 text-gray-950 flex items-center justify-center font-black text-sm">۱</span>
+                        <h4 class="font-bold text-sm text-gold-300">ثبت‌نام و ورود</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed">با شماره موبایل خود وارد شوید و حساب کاربری خود را در کمتر از ۱۰ ثانیه بسازید.</p>
+                    </div>
+
+                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10 space-y-3 relative">
+                        <span class="w-8 h-8 rounded-full bg-gold-500 text-gray-950 flex items-center justify-center font-black text-sm">۲</span>
+                        <h4 class="font-bold text-sm text-gold-300">تعیین مقدار طلا</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed">در بخش قلک، وزن یا مبلغ مورد نظرتان را وارد کرده و شماره کارت دریافت کنید.</p>
+                    </div>
+
+                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10 space-y-3 relative">
+                        <span class="w-8 h-8 rounded-full bg-gold-500 text-gray-950 flex items-center justify-center font-black text-sm">۳</span>
+                        <h4 class="font-bold text-sm text-gold-300">واریز و ارسال رسید</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed">مبلغ را کارت به کارت نموده و عکس فیش واریزی را بارگذاری کنید تا ادمین تایید کند.</p>
+                    </div>
+
+                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10 space-y-3 relative">
+                        <span class="w-8 h-8 rounded-full bg-gold-500 text-gray-950 flex items-center justify-center font-black text-sm">۴</span>
+                        <h4 class="font-bold text-sm text-gold-300">افزایش طلای کیف پول</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed">بلافاصله طلای خریده‌شده به کیف پول شما اضافه می‌شود و لحظه‌ای رشد می‌کند.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Featured Products Preview -->
+            <div class="space-y-6">
+                <div class="flex justify-between items-end">
+                    <div>
+                        <h3 class="text-xl font-black text-gray-900">محصولات و زیورآلات منتخب</h3>
+                        <p class="text-xs text-gray-500 mt-1">امکان خرید مستقیم یا تعویض با طلای قلک</p>
+                    </div>
+                    <button onclick="switchTab('shop')" class="text-xs font-bold text-gold-700 hover:underline flex items-center gap-1">
+                        مشاهده همه محصولات <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                </div>
+
+                <div id="home-featured-products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Dynamic rendering via JS -->
+                </div>
+            </div>
+
+            <!-- 7. Customer Reviews / Testimonials -->
+            <div class="space-y-6">
+                <div class="text-center max-w-xl mx-auto space-y-2">
+                    <h3 class="text-2xl font-black text-gray-900">نظرات همراهان طلای معتمدی</h3>
+                    <p class="text-xs text-gray-500">تجربه سرمایه‌گذاران و خریداران واقعی ما</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gold-100 flex items-center justify-center font-bold text-gold-800 text-xs">م‌ر</div>
+                            <div>
+                                <h5 class="font-bold text-xs text-gray-900">مهدی رضایی</h5>
+                                <span class="text-[10px] text-gray-400">سرمایه‌گذار از تهران</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed">«بهترین ویژگی قلک طلا اینه که هر ماه خرد خرد مثلاً با ۱ میلیون تومن طلا می‌خرم و نیازی نیست حتما پول یک سکه کامل رو داشته باشم.»</p>
+                        <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gold-100 flex items-center justify-center font-bold text-gold-800 text-xs">س‌ام</div>
+                            <div>
+                                <h5 class="font-bold text-xs text-gray-900">سارا احمدی</h5>
+                                <span class="text-[10px] text-gray-400">خریدار مصنوعات</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed">«من طلای آب‌شده رو در قلک جمع کردم و بعدش با سرویس طلای البرناردو تعویض کردم. ارسالشون فوق‌العاده سریع و عالی بود.»</p>
+                        <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gold-100 flex items-center justify-center font-bold text-gold-800 text-xs">ع‌ک</div>
+                            <div>
+                                <h5 class="font-bold text-xs text-gray-900">علیرضا کریمی</h5>
+                                <span class="text-[10px] text-gray-400">معامله‌گر طلا</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed">«پشتیبانی ادمین و تایید سریع رسیدها واقعا بی‌نظیره. قیمت‌ها دقیقا با نرخ بازار تهران به‌روز میشه.»</p>
+                        <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. FAQ Accordion Section -->
+            <div class="bg-white p-6 sm:p-10 rounded-3xl border border-gold-200/80 shadow-sm space-y-6">
+                <div class="text-center max-w-xl mx-auto space-y-2">
+                    <h3 class="text-2xl font-black text-gray-900">سوالات متداول شما</h3>
+                    <p class="text-xs text-gray-500">پاسخ شفاف به پرسش‌های رایج کاربران</p>
+                </div>
+
+                <div class="max-w-3xl mx-auto space-y-3">
+                    <div class="border border-gray-200 rounded-2xl overflow-hidden">
+                        <button onclick="toggleFaq(1)" class="w-full text-right p-4 font-bold text-xs sm:text-sm text-gray-800 bg-gray-50 flex justify-between items-center">
+                            <span>حداقل میزان خرید طلای آب‌شده در قلک چقدر است؟</span>
+                            <i id="faq-icon-1" class="fa-solid fa-chevron-down text-gold-600"></i>
+                        </button>
+                        <div id="faq-ans-1" class="hidden p-4 text-xs text-gray-600 leading-relaxed border-t border-gray-100">
+                            شما می‌توانید با هر مبلغی حتا ۵۰ هزار تومان یا ۱ صوت (۰.۰۰۱ گرم) طلا بخرید. هیچ محدودیتی در حداقل سرمایه‌گذاری وجود ندارد.
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-2xl overflow-hidden">
+                        <button onclick="toggleFaq(2)" class="w-full text-right p-4 font-bold text-xs sm:text-sm text-gray-800 bg-gray-50 flex justify-between items-center">
+                            <span>آیا امکان تحویل فیزیکی طلای آب‌شده وجود دارد؟</span>
+                            <i id="faq-icon-2" class="fa-solid fa-chevron-down text-gold-600"></i>
+                        </button>
+                        <div id="faq-ans-2" class="hidden p-4 text-xs text-gray-600 leading-relaxed border-t border-gray-100">
+                            بله، هر زمان که مجموع طلای شما در قلک به حد نصاب شمش استاندارد (مثلاً ۵ گرم یا ۱۰ گرم) برسد، می‌توانید درخواست تحویل فیزیکی ثبت کنید.
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-2xl overflow-hidden">
+                        <button onclick="toggleFaq(3)" class="w-full text-right p-4 font-bold text-xs sm:text-sm text-gray-800 bg-gray-50 flex justify-between items-center">
+                            <span>عیار طلای آب‌شده چقدر است و چگونه تضمین می‌شود؟</span>
+                            <i id="faq-icon-3" class="fa-solid fa-chevron-down text-gold-600"></i>
+                        </button>
+                        <div id="faq-ans-3" class="hidden p-4 text-xs text-gray-600 leading-relaxed border-t border-gray-100">
+                            تمام طلاهای گالری معتمدی دارای عیار ۱۸ (۷۵۰ استاندارد) با کد ریگیری رسمی معتبر اتحادیه طلا و جواهر می‌باشند.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. Educational Articles & Blog Cards -->
+            <div class="space-y-6">
+                <div class="flex justify-between items-end">
+                    <div>
+                        <h3 class="text-xl font-black text-gray-900">مجله طلا و آموزش سرمایه‌گذاری</h3>
+                        <p class="text-xs text-gray-500 mt-1">آخرین تحلیل‌ها و مقالات آموزشی بازار طلا</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition">
+                        <img src="https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=600&q=80" class="w-full h-40 object-cover">
+                        <div class="p-5 space-y-2">
+                            <span class="text-[10px] font-bold text-gold-600 bg-gold-50 px-2.5 py-1 rounded-md">آموزش طلا</span>
+                            <h4 class="font-bold text-sm text-gray-900">تفاوت طلای آب‌شده با سکه و طلای دست دوم چیست؟</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed line-clamp-2">در این مقاله بررسی می‌کنیم چرا خرید طلای آب‌شده سودآوری بیشتری برای پس‌انداز دارد...</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition">
+                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" class="w-full h-40 object-cover">
+                        <div class="p-5 space-y-2">
+                            <span class="text-[10px] font-bold text-gold-600 bg-gold-50 px-2.5 py-1 rounded-md">راهنمای پس‌انداز</span>
+                            <h4 class="font-bold text-sm text-gray-900">چگونه با پول‌های خرد ماهانه طلا بخریم؟</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed line-clamp-2">استراتژی خرید مستمر و پله‌ای طلا بدون نگرانی از نوسانات کوتاه‌مدت بازار...</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition">
+                        <img src="https://images.unsplash.com/photo-1535320903710-d993d3d77d29?auto=format&fit=crop&w=600&q=80" class="w-full h-40 object-cover">
+                        <div class="p-5 space-y-2">
+                            <span class="text-[10px] font-bold text-gold-600 bg-gold-50 px-2.5 py-1 rounded-md">تحلیل بازار</span>
+                            <h4 class="font-bold text-sm text-gray-900">پیش‌بینی روند انس جهانی طلا و نرخ تورم</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed line-clamp-2">بررسی عوامل کلیدی موثر بر قیمت طلا در ماه‌های آینده و توصیه‌های سرمایه‌گذاری...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. Certificates & Trust Badges -->
+            <div class="bg-gold-50/60 p-6 rounded-3xl border border-gold-200 text-center space-y-4">
+                <span class="text-xs font-bold text-gold-800">دارای تمامی مجوزهای قانونی و رسمی</span>
+                <div class="flex flex-wrap justify-center items-center gap-8 pt-2">
+                    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-gold-200 shadow-sm text-xs font-bold text-gray-800">
+                        <i class="fa-solid fa-certificate text-gold-600 text-base"></i>
+                        پروانه کسب اتحادیه طلا و جواهر
+                    </div>
+                    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-gold-200 shadow-sm text-xs font-bold text-gray-800">
+                        <i class="fa-solid fa-shield-check text-gold-600 text-base"></i>
+                        نماد اعتماد الکترونیکی (ای‌نماد)
+                    </div>
+                    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-gold-200 shadow-sm text-xs font-bold text-gray-800">
+                        <i class="fa-solid fa-lock text-gold-600 text-base"></i>
+                        درگاه پرداخت امن بانکی
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== PAGE 2: LIVE PRICE & CHART ==================== -->
+        <section id="page-live-price" class="tab-content hidden space-y-8">
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-gold-200/80 shadow-sm space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-100 pb-5">
+                    <div>
+                        <h2 class="text-2xl font-black text-gray-900">نمودار و قیمت لحظه‌ای طلا</h2>
+                        <p class="text-xs text-gray-500 mt-1">بروزرسانی مستقیم از اتاق مبادلات طلای تهران</p>
+                    </div>
+                    <div class="flex items-center gap-2 bg-gold-50 border border-gold-200 px-4 py-2 rounded-xl text-gold-700 font-bold text-sm">
+                        <span>قیمت فعلی ۱ گرم ۱۸ عیار:</span>
+                        <span id="chart-current-price" class="text-base text-gray-900">۴,۸۵۰,۰۰۰ تومان</span>
+                    </div>
+                </div>
+
+                <!-- Chart Container -->
+                <div class="h-80 w-full">
+                    <canvas id="goldChart"></canvas>
+                </div>
+
+                <!-- Price Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-right text-gray-600">
+                        <thead class="bg-gold-50/50 text-gray-800 text-xs font-bold uppercase border-y border-gold-100">
+                            <tr>
+                                <th class="py-3 px-4">نوع دارایی</th>
+                                <th class="py-3 px-4">قیمت فعلی (تومان)</th>
+                                <th class="py-3 px-4">تغییر ۲۴ ساعت</th>
+                                <th class="py-3 px-4">وضعیت</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr>
+                                <td class="py-3.5 px-4 font-bold text-gray-900">طلای ۱۸ عیار (گرم)</td>
+                                <td class="py-3.5 px-4 font-semibold text-gray-800">۴,۸۵۰,۰۰۰</td>
+                                <td class="py-3.5 px-4 text-emerald-600 font-bold">+۱.۲%</td>
+                                <td class="py-3.5 px-4"><span class="bg-emerald-50 text-emerald-600 text-xs px-2.5 py-1 rounded-md font-bold">صعودی</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3.5 px-4 font-bold text-gray-900">طلای آب‌شده (مثقال)</td>
+                                <td class="py-3.5 px-4 font-semibold text-gray-800">۲۱,۰۰۰,۰۰۰</td>
+                                <td class="py-3.5 px-4 text-emerald-600 font-bold">+۰.۹%</td>
+                                <td class="py-3.5 px-4"><span class="bg-emerald-50 text-emerald-600 text-xs px-2.5 py-1 rounded-md font-bold">صعودی</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3.5 px-4 font-bold text-gray-900">سکه امامی طرح جدید</td>
+                                <td class="py-3.5 px-4 font-semibold text-gray-800">۵۲,۳۰۰,۰۰۰</td>
+                                <td class="py-3.5 px-4 text-red-500 font-bold">-۰.۴%</td>
+                                <td class="py-3.5 px-4"><span class="bg-red-50 text-red-600 text-xs px-2.5 py-1 rounded-md font-bold">اصلاحی</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PAGE 3: PIGGY BANK (GHOLLAK) ==================== -->
+        <section id="page-piggy-bank" class="tab-content hidden space-y-8">
+            <!-- User Gold Wallet Card -->
+            <div class="gold-gradient p-1 rounded-3xl shadow-xl">
+                <div class="bg-gray-950 text-white rounded-[22px] p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div>
+                        <span class="text-xs font-bold text-gold-400 tracking-wider uppercase">دارایی فعلی شما در قلک معتمدی</span>
+                        <div class="flex items-baseline gap-3 mt-2">
+                            <h3 id="user-gold-weight" class="text-3xl sm:text-4xl font-black text-white">۰.۰۰۰</h3>
+                            <span class="text-gold-400 font-bold text-lg">گرم طلای آب‌شده</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">
+                            ارزش تقریبی ریالی (با نرخ زنده): 
+                            <strong id="user-gold-value" class="text-white font-bold">۰ تومان</strong>
+                        </p>
+                    </div>
+
+                    <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 w-full md:w-auto text-xs space-y-2">
+                        <div class="flex justify-between gap-6"><span class="text-gray-300">عیار طلا:</span><span class="font-bold text-gold-300">۷۵۰ (۱۸ عیار استاندارد)</span></div>
+                        <div class="flex justify-between gap-6"><span class="text-gray-300">حداقل خرید:</span><span class="font-bold text-gold-300">۱ صوت (۰.۰۰۱ گرم)</span></div>
+                        <div class="flex justify-between gap-6"><span class="text-gray-300">کارمزد خرید:</span><span class="font-bold text-emerald-400">صفر درصد</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buy Gold Calculator & Purchase Box -->
+            <div class="bg-white p-6 sm:p-8 rounded-3xl border border-gold-200/80 shadow-sm grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">خرید طلای آب‌شده (افزایش موجودی قلک)</h3>
+                        <p class="text-xs text-gray-500 mt-1">مقدار وزن یا مبلغ مورد نظر خود را وارد کنید.</p>
+                    </div>
+
+                    <!-- Input Modes Switch -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-2">وزن طلا (گرم):</label>
+                            <div class="relative">
+                                <input id="buy-weight-input" type="number" step="0.001" min="0.001" max="10000" placeholder="مثلا ۰.۵ گرم" oninput="calculatePiggyBuy()" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 font-bold">
+                                <span class="absolute left-4 top-3 text-xs text-gray-400 font-bold">گرم</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-2">یا مبلغ به تومان:</label>
+                            <div class="relative">
+                                <input id="buy-toman-input" type="number" placeholder="مثلا ۲,۰۰۰,۰۰۰ تومان" oninput="calculatePiggyBuyFromToman()" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 font-bold">
+                                <span class="absolute left-4 top-3 text-xs text-gray-400 font-bold">تومان</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calculation Summary Box -->
+                    <div class="bg-gold-50/70 rounded-2xl p-4 border border-gold-200 space-y-2 text-sm">
+                        <div class="flex justify-between text-gray-600">
+                            <span>قیمت هر گرم طلا:</span>
+                            <span id="piggy-gram-price-display" class="font-bold text-gray-900">۴,۸۵۰,۰۰۰ تومان</span>
+                        </div>
+                        <div class="flex justify-between text-gray-900 font-black text-base border-t border-gold-200/80 pt-2">
+                            <span>مبلغ قابل پرداخت:</span>
+                            <span id="piggy-total-pay" class="text-gold-700">۰ تومان</span>
+                        </div>
+                    </div>
+
+                    <button onclick="submitPiggyBankPurchase()" class="w-full gold-gradient text-gray-900 font-black py-4 rounded-xl shadow-lg hover:opacity-95 transition text-base">
+                        ثبت خرید و دریافت شماره کارت واریز
+                    </button>
+                </div>
+
+                <!-- Guidance & Card Payment Flow -->
+                <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200/80 space-y-4">
+                    <h4 class="font-bold text-gray-900 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-credit-card text-gold-600"></i>
+                        راهنمای پرداخت و واریز وجه
+                    </h4>
+                    <ul class="text-xs text-gray-600 space-y-3 leading-relaxed">
+                        <li class="flex items-start gap-2">
+                            <span class="w-5 h-5 rounded-full bg-gold-200 text-gold-800 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">۱</span>
+                            وزن مورد نظر خود را مشخص کنید و دکمه ثبت خرید را بزنید.
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="w-5 h-5 rounded-full bg-gold-200 text-gold-800 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">۲</span>
+                            مبلغ را به شماره کارت رسمی طلای معتمدی واریز کنید.
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="w-5 h-5 rounded-full bg-gold-200 text-gold-800 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">۳</span>
+                            عکس رسید کارت به کارت را بارگذاری کنید تا ادمین تایید کند.
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="w-5 h-5 rounded-full bg-gold-200 text-gold-800 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">۴</span>
+                            بلافاصله پس از تایید، وزن طلا به کیف پول طلای شما اضافه می‌شود.
+                        </li>
+                    </ul>
+
+                    <div class="bg-white p-4 rounded-xl border border-gray-200 space-y-2 mt-4">
+                        <span class="text-[11px] text-gray-400 font-bold block">شماره کارت جهت واریزی (معتمدی):</span>
+                        <div class="flex justify-between items-center bg-gray-50 p-2.5 rounded-lg border border-gray-200">
+                            <span id="display-admin-card" class="font-mono font-bold text-sm text-gray-800 tracking-wider">6037-9918-1234-5678</span>
+                            <button onclick="copyToClipboard('6037-9918-1234-5678')" class="text-xs bg-gold-500 text-white px-2.5 py-1 rounded font-bold hover:bg-gold-600 transition">کپی</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PAGE 4: INVITE FRIENDS ==================== -->
+        <section id="page-invite" class="tab-content hidden space-y-8">
+            <div class="bg-white p-6 sm:p-10 rounded-3xl border border-gold-200/80 shadow-sm text-center max-w-2xl mx-auto space-y-6">
+                <div class="w-20 h-20 bg-gold-50 rounded-full flex items-center justify-center mx-auto text-gold-600 text-3xl shadow-inner">
+                    <i class="fa-solid fa-gift"></i>
+                </div>
+                <h2 class="text-2xl font-black text-gray-900">دعوت از دوستان و دریافت پاداش طلایی</h2>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    با ارسال لینک اختصاصی خود به دوستان‌تان، با هر اولین خرید آن‌ها از قلک طلا، مقدار **۱۰ میلی‌گرم طلا** به صورت رایگان به کیف پول شما و دوست‌تان اضافه خواهد شد!
+                </p>
+
+                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200 space-y-3">
+                    <span class="text-xs font-bold text-gray-500 block">لینک دعوت اختصاصی شما:</span>
+                    <div class="flex items-center gap-2">
+                        <input id="invite-link-input" type="text" readonly value="https://melligold-motamedi.com/ref?id=98106" class="w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono text-gray-700 text-center">
+                        <button onclick="copyInviteLink()" class="gold-gradient text-gray-900 px-4 py-2 rounded-xl text-xs font-bold shrink-0">کپی لینک</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PAGE 5: CART ==================== -->
+        <section id="page-cart" class="tab-content hidden space-y-8">
+            <h2 class="text-2xl font-black text-gray-900">سبد خرید شما</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Cart Items List -->
+                <div id="cart-items-container" class="lg:col-span-2 space-y-4">
+                    <!-- Dynamic Cart Items via JS -->
+                </div>
+
+                <!-- Checkout Summary Card -->
+                <div class="bg-white p-6 rounded-3xl border border-gold-200/80 shadow-sm h-fit space-y-6">
+                    <h3 class="font-bold text-gray-900 border-b border-gray-100 pb-3">خلاصه سفارش</h3>
+                    
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between text-gray-600"><span>مجموع وزن طلا:</span><span id="cart-total-weight" class="font-bold text-gray-900">۰ گرم</span></div>
+                        <div class="flex justify-between text-gray-600"><span>مجموع مبلغ (بر اساس نرخ لحظه‌ای):</span><span id="cart-total-price" class="font-bold text-gray-900">۰ تومان</span></div>
+                    </div>
+
+                    <div id="checkout-action-area" class="space-y-3 pt-4 border-t border-gray-100">
+                        <button onclick="requestInquiryFromAdmin()" class="w-full bg-gray-900 text-white font-bold py-3.5 rounded-xl hover:bg-black transition text-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane text-gold-400"></i>
+                            استعلام قیمت و موجودی از ادمین
+                        </button>
+                        <p class="text-[11px] text-gray-400 text-center">پس از تایید ادمین، گزینه ثبت نهایی خرید فعال خواهد شد.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PAGE 6: GOLD SHOP (VITRINE) ==================== -->
+        <section id="page-shop" class="tab-content hidden space-y-8">
+            <div>
+                <h2 class="text-2xl font-black text-gray-900">ویترین مصنوعات و سرویس طلا</h2>
+                <p class="text-xs text-gray-500 mt-1">امکان خرید مستقیم یا معاوضه با کیف پول طلای آب‌شده</p>
+            </div>
+
+            <!-- Categories Bar (Digikala style) -->
+            <div class="flex items-center gap-3 overflow-x-auto pb-2 hide-scrollbar">
+                <button onclick="filterShopCategory('all')" class="category-btn active px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap bg-gold-500 text-white shadow-md">همه محصولات</button>
+                <button onclick="filterShopCategory('service')" class="category-btn px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gold-50">سرویس طلا</button>
+                <button onclick="filterShopCategory('ring')" class="category-btn px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gold-50">انگشتر</button>
+                <button onclick="filterShopCategory('necklace')" class="category-btn px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gold-50">گردنبند</button>
+                <button onclick="filterShopCategory('bracelet')" class="category-btn px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gold-50">دستبند</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Products dynamically rendered by JS -->
+            </div>
+        </section>
+
+        <!-- ==================== PAGE 7: ABOUT US ==================== -->
+        <section id="page-about" class="tab-content hidden space-y-8">
+            <div class="bg-white p-8 sm:p-12 rounded-3xl border border-gold-200/80 shadow-sm max-w-4xl mx-auto space-y-6">
+                <h2 class="text-3xl font-black text-gray-900 border-b border-gray-100 pb-4">درباره طلای معتمدی</h2>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    گالری و پلتفرم آنلاین «طلای معتمدی» با هدف تسهیل در امر سرمایه‌گذاری طلا برای تمامی اقشار جامعه ایجاد شده است. ما این امکان را فراهم کرده‌ایم تا هر شخص با هر میزان بودجه، بتواند طلای ۱۸ عیار آب‌شده خریداری کرده و دارایی خود را از تورم حفظ کند.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 text-xs font-bold">
+                    <div class="bg-gold-50/60 p-4 rounded-xl border border-gold-200">📍 آدرس: تهران، بازار بزرگ، پاساژ حکیم‌ها، پلاک ۴۲</div>
+                    <div class="bg-gold-50/60 p-4 rounded-xl border border-gold-200">📞 تلفن پشتیبانی: ۰۲۱-۱۲۳۴۵۶۷۸</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PAGE 8: ADMIN PANEL ==================== -->
+        <section id="page-admin" class="tab-content hidden space-y-8">
+            <div class="bg-red-500 text-white p-6 rounded-3xl shadow-lg flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-black">پنل مدیریت طلای معتمدی</h2>
+                    <p class="text-xs text-red-100 mt-1">ورود مجاز با شماره: 09981064505</p>
+                </div>
+                <span class="bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold">مدیر ارشد</span>
+            </div>
+
+            <!-- Admin Tabs Navigation -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Pending Inquiries Section -->
+                <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+                    <h3 class="font-bold text-gray-900 border-b border-gray-100 pb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-bell text-gold-500"></i>
+                        استعلام‌های منتظر تایید موجودی و قیمت
+                    </h3>
+                    <div id="admin-inquiries-list" class="space-y-3 text-xs">
+                        <!-- Dynamic via JS -->
+                    </div>
+                </div>
+
+                <!-- Pending Piggy Bank Receipts -->
+                <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+                    <h3 class="font-bold text-gray-900 border-b border-gray-100 pb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-receipt text-emerald-500"></i>
+                        رسیدهای واریز قلک طلا
+                    </h3>
+                    <div id="admin-receipts-list" class="space-y-3 text-xs">
+                        <!-- Dynamic via JS -->
+                    </div>
+                </div>
+
+                <!-- Products & Bank Card Controls -->
+                <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-6">
+                    <h3 class="font-bold text-gray-900 border-b border-gray-100 pb-3">تنظیمات ادمین و افزودن محصول</h3>
+                    
+                    <!-- Change Admin Card -->
+                    <div class="space-y-2">
+                        <label class="block text-xs font-bold text-gray-700">تغییر شماره کارت جهت واریزی:</label>
+                        <div class="flex gap-2">
+                            <input id="admin-card-input" type="text" value="6037-9918-1234-5678" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-mono font-bold">
+                            <button onclick="updateAdminCardNumber()" class="bg-gray-900 text-white px-3 py-2 rounded-xl text-xs font-bold">ثبت</button>
+                        </div>
+                    </div>
+
+                    <!-- Add New Product Form -->
+                    <div class="space-y-3 pt-4 border-t border-gray-100">
+                        <h4 class="font-bold text-xs text-gray-800">افزودن محصول جدید به ویترین:</h4>
+                        <input id="new-prod-title" type="text" placeholder="نام محصول" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-xs">
+                        <input id="new-prod-code" type="text" placeholder="کد محصول (SKU)" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-xs">
+                        <div class="grid grid-cols-2 gap-2">
+                            <input id="new-prod-weight" type="number" step="0.01" placeholder="وزن (گرم)" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-xs">
+                            <input id="new-prod-fee" type="number" placeholder="اجرت (%)" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-xs">
+                        </div>
+                        <select id="new-prod-cat" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-xs">
+                            <option value="service">سرویس طلا</option>
+                            <option value="ring">انگشتر</option>
+                            <option value="necklace">گردنبند</option>
+                            <option value="bracelet">دستبند</option>
+                        </select>
+                        <input id="new-prod-img" type="text" placeholder="لینک عکس محصول" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-xs">
+                        <button onclick="addNewProductFromAdmin()" class="w-full gold-gradient text-gray-900 font-bold py-2.5 rounded-xl text-xs">افزودن محصول</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER SECTION (Expanded) -->
+    <footer class="bg-gray-950 text-white pt-16 pb-12 border-t border-gold-600/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl gold-gradient p-[2px] flex items-center justify-center">
+                            <div class="w-full h-full bg-gray-950 rounded-[10px] flex items-center justify-center">
+                                <i class="fa-solid fa-gem text-gold-500 text-lg"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-black">طلای معتمدی</h3>
+                    </div>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        پلتفرم تخصصی و امن خرید آنلاین طلای آب‌شده و مصنوعات با قیمت زنده و فاکتور رسمی.
+                    </p>
+                    <div class="flex gap-3 text-gold-400 text-base pt-2">
+                        <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="hover:text-white transition"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="#" class="hover:text-white transition"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div class="space-y-3">
+                    <h4 class="font-bold text-sm text-gold-300">دسترسی سریع</h4>
+                    <ul class="text-xs text-gray-400 space-y-2">
+                        <li><button onclick="switchTab('home')" class="hover:text-gold-400 transition">صفحه اصلی</button></li>
+                        <li><button onclick="switchTab('piggy-bank')" class="hover:text-gold-400 transition">قلک طلای آب‌شده</button></li>
+                        <li><button onclick="switchTab('live-price')" class="hover:text-gold-400 transition">نمودار زنده بازار</button></li>
+                        <li><button onclick="switchTab('shop')" class="hover:text-gold-400 transition">ویترین زیورآلات</button></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Contact Info -->
+                <div class="space-y-3">
+                    <h4 class="font-bold text-sm text-gold-300">ارتباط با گالری</h4>
+                    <ul class="text-xs text-gray-400 space-y-2.5">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-gold-500"></i> ۰۲۱-۱۲۳۴۵۶۷۸</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-location-dot text-gold-500 mt-0.5"></i> تهران، بازار بزرگ، پاساژ حکیم‌ها</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-clock text-gold-500"></i> شنبه تا چهارشنبه: ۱۰ الی ۱۹</li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Newsletter -->
+                <div class="space-y-3">
+                    <h4 class="font-bold text-sm text-gold-300">عضویت در خبرنامه تحلیلی</h4>
+                    <p class="text-[11px] text-gray-400">آخرین تحلیل‌های بازار طلا را در ایمیل خود دریافت کنید.</p>
+                    <div class="space-y-2">
+                        <input type="email" placeholder="ایمیل خود را وارد کنید..." class="w-full bg-white/10 border border-white/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-gold-500">
+                        <button class="w-full gold-gradient text-gray-950 font-bold py-2 rounded-xl text-xs">عضویت</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-6 text-center text-xs text-gray-500">
+                تمام حقوق مادی و معنوی متعلق به **گالری طلای معتمدی** می‌افتد.
+            </div>
+        </div>
+    </footer>
+
+    <!-- MOBILE BOTTOM NAVIGATION (iOS Style) -->
+    <nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-200 py-2 px-3 z-50 shadow-lg flex justify-around items-center">
+        <button onclick="switchTab('home')" class="nav-mobile-btn flex flex-col items-center gap-1 text-gold-600" data-tab="home">
+            <i class="fa-solid fa-house text-lg"></i>
+            <span class="text-[10px] font-bold">خانه</span>
+        </button>
+        <button onclick="switchTab('live-price')" class="nav-mobile-btn flex flex-col items-center gap-1 text-gray-400" data-tab="live-price">
+            <i class="fa-solid fa-chart-line text-lg"></i>
+            <span class="text-[10px] font-bold">نمودار</span>
+        </button>
+        <button onclick="switchTab('piggy-bank')" class="nav-mobile-btn flex flex-col items-center gap-1 text-gray-400" data-tab="piggy-bank">
+            <i class="fa-solid fa-piggy-bank text-lg"></i>
+            <span class="text-[10px] font-bold">قلک</span>
+        </button>
+        <button onclick="switchTab('shop')" class="nav-mobile-btn flex flex-col items-center gap-1 text-gray-400" data-tab="shop">
+            <i class="fa-solid fa-store text-lg"></i>
+            <span class="text-[10px] font-bold">ویترین</span>
+        </button>
+        <button onclick="switchTab('cart')" class="nav-mobile-btn flex flex-col items-center gap-1 text-gray-400 relative" data-tab="cart">
+            <i class="fa-solid fa-bag-shopping text-lg"></i>
+            <span class="text-[10px] font-bold">سبد خرید</span>
+        </button>
+    </nav>
+
+    <!-- LOGIN MODAL -->
+    <div id="login-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full space-y-6 shadow-2xl border border-gold-200 relative">
+            <button onclick="closeLoginModal()" class="absolute top-4 left-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            
+            <div class="text-center space-y-2">
+                <div class="w-12 h-12 gold-gradient rounded-2xl flex items-center justify-center mx-auto text-gray-900 font-bold text-xl"><i class="fa-solid fa-user"></i></div>
+                <h3 class="text-xl font-black text-gray-900">ورود / ثبت‌نام</h3>
+                <p class="text-xs text-gray-500">جهت دسترسی به حساب کاربری شماره موبایل خود را وارد کنید.</p>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-2">شماره همراه:</label>
+                    <input id="user-phone-input" type="tel" placeholder="۰۹۱۲۳۴۵۶۷۸۹" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-bold text-center tracking-wider focus:outline-none focus:border-gold-500">
+                </div>
+                <button onclick="processLogin()" class="w-full gold-gradient text-gray-900 font-black py-3.5 rounded-xl shadow-md text-sm">تایید و ورود</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PIGGY RECEIPT MODAL -->
+    <div id="receipt-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full space-y-6 shadow-2xl border border-gold-200 relative">
+            <button onclick="closeReceiptModal()" class="absolute top-4 left-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            
+            <h3 class="text-lg font-black text-gray-900 border-b border-gray-100 pb-3">آپلود رسید واریز وجه</h3>
+
+            <div class="space-y-4 text-xs">
+                <div class="bg-gold-50 p-3 rounded-xl border border-gold-200">
+                    <div>مبلغ واریزی: <strong id="modal-receipt-amount" class="text-gold-700">۰ تومان</strong></div>
+                    <div>مقدار طلا: <strong id="modal-receipt-weight" class="text-gray-900">۰ گرم</strong></div>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-gray-700 mb-2">کارت واریز شده به:</label>
+                    <input id="receipt-card-display" type="text" readonly class="w-full bg-gray-100 border border-gray-200 rounded-xl p-3 font-mono font-bold text-gray-800">
+                </div>
+
+                <div>
+                    <label class="block font-bold text-gray-700 mb-2">تصویر فیش/رسید کارت به کارت:</label>
+                    <input id="receipt-file-input" type="file" accept="image/*" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-gold-50 file:text-gold-700 hover:file:bg-gold-100">
+                </div>
+
+                <button onclick="confirmSubmitReceipt()" class="w-full gold-gradient text-gray-900 font-bold py-3 rounded-xl shadow-md text-sm">ارسال برای تایید ادمین</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FINAL CHECKOUT MODAL (Shipping & Gold Wallet Payment) -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-6 shadow-2xl border border-gold-200 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeCheckoutModal()" class="absolute top-4 left-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            
+            <h3 class="text-xl font-black text-gray-900 border-b border-gray-100 pb-3">تکمیل خرید و ارسال سفارش</h3>
+
+            <div class="space-y-4 text-xs">
+                <div>
+                    <label class="block font-bold text-gray-700 mb-1">نام و نام خانوادگی تحویل گیرنده:</label>
+                    <input id="checkout-name" type="text" placeholder="مثلا: امیرحسین معتمدی" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 font-bold">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1">شماره تماس:</label>
+                        <input id="checkout-phone" type="tel" placeholder="۰۹۱۲..." class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 font-bold">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1">کد پستی ۱۰ رقمی:</label>
+                        <input id="checkout-postal" type="text" placeholder="۱۲۳۴۵۶۷۸۹۰" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 font-bold">
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-bold text-gray-700 mb-1">آدرس دقیق پستی:</label>
+                    <textarea id="checkout-address" rows="2" placeholder="استان، شهر، خیابان اصلی..." class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 font-bold"></textarea>
+                </div>
+
+                <!-- Payment Method Selection -->
+                <div class="space-y-2 pt-2">
+                    <label class="block font-bold text-gray-700">روش پرداخت:</label>
+                    
+                    <label class="flex items-center justify-between p-3 border rounded-xl bg-gold-50/50 border-gold-300 cursor-pointer">
+                        <div class="flex items-center gap-2">
+                            <input type="radio" name="pay-method" value="wallet" checked class="text-gold-600 focus:ring-gold-500">
+                            <span class="font-bold text-gray-900">پرداخت با کیف پول طلا (طلای آب‌شده)</span>
+                        </div>
+                        <i class="fa-solid fa-vault text-gold-600"></i>
+                    </label>
+
+                    <label class="flex items-center justify-between p-3 border rounded-xl border-gray-200 cursor-pointer">
+                        <div class="flex items-center gap-2">
+                            <input type="radio" name="pay-method" value="card" class="text-gold-600 focus:ring-gold-500">
+                            <span class="font-bold text-gray-900">واریز به شماره کارت</span>
+                        </div>
+                        <i class="fa-solid fa-credit-card text-gray-400"></i>
+                    </label>
+                </div>
+
+                <button onclick="finalizePurchaseOrder()" class="w-full gold-gradient text-gray-900 font-black py-3.5 rounded-xl shadow-lg text-sm">ثبت و نهایی‌سازی سفارش</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        // GLOBAL APP STATE
+        const AppState = {
+            liveGoldPrice: 4850000, // Tomans per 1 gram of 18k
+            adminPhone: "09981064505",
+            adminCardNumber: "6037-9918-1234-5678",
+            currentUser: null,
+            cart: [],
+            pendingInquiries: [],
+            pendingReceipts: [],
+            products: [
+                { id: 1, code: "MOT-101", title: "سرویس طلای طرح البرناردو", category: "service", weight: 14.500, fee: 7, img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" },
+                { id: 2, code: "MOT-102", title: "دستبند طلای کارتیر ۵ ردیفه", category: "bracelet", weight: 8.200, fee: 5, img: "https://images.unsplash.com/photo-1611591475155-4282fc289e78?auto=format&fit=crop&w=600&q=80" },
+                { id: 3, code: "MOT-103", title: "انگشتر سولیتیر طلا و نگین اتمی", category: "ring", weight: 3.150, fee: 6, img: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80" },
+                { id: 4, code: "MOT-104", title: "گردنبند طلا طرح ون‌کلیف", category: "necklace", weight: 5.800, fee: 8, img: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=600&q=80" }
+            ],
+            tempPiggyBuy: null
+        };
+
+        // INITIALIZATION
+        document.addEventListener('DOMContentLoaded', () => {
+            initChart();
+            renderProducts();
+            renderHomeFeaturedProducts();
+            updateLiveTickers();
+            updateHomeSavingsCalculator();
+
+            // Simulating Live Price Changes every 10 seconds
+            setInterval(() => {
+                const delta = (Math.random() - 0.48) * 15000;
+                AppState.liveGoldPrice = Math.round(AppState.liveGoldPrice + delta);
+                updateLiveTickers();
+                updateUserWalletDisplay();
+            }, 10000);
+        });
+
+        // TAB NAVIGATION SYSTEM
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(`page-${tabId}`);
+            if (target) target.classList.remove('hidden');
+
+            // Update Nav Active States
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.dataset.tab === tabId) {
+                    btn.classList.add('text-gold-600', 'font-bold');
+                } else {
+                    btn.classList.remove('text-gold-600', 'font-bold');
+                }
+            });
+
+            document.querySelectorAll('.nav-mobile-btn').forEach(btn => {
+                if (btn.dataset.tab === tabId) {
+                    btn.classList.add('text-gold-600');
+                    btn.classList.remove('text-gray-400');
+                } else {
+                    btn.classList.remove('text-gold-600');
+                    btn.classList.add('text-gray-400');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // HOME CALCULATOR FUNCTION
+        function updateHomeSavingsCalculator() {
+            const monthlyVal = parseFloat(document.getElementById('calc-range').value);
+            document.getElementById('calc-monthly-label').innerText = `${formatNumber(monthlyVal)} تومان`;
+
+            const monthlyGoldGrams = monthlyVal / AppState.liveGoldPrice;
+            document.getElementById('calc-monthly-gold').innerText = `${monthlyGoldGrams.toFixed(3)} گرم`;
+
+            const yearlyGold = monthlyGoldGrams * 12;
+            document.getElementById('calc-yearly-gold').innerText = `${yearlyGold.toFixed(3)} گرم`;
+
+            document.getElementById('calc-res-1y').innerText = `${yearlyGold.toFixed(1)} گرم`;
+            document.getElementById('calc-res-3y').innerText = `${(yearlyGold * 3).toFixed(1)} گرم`;
+            document.getElementById('calc-res-5y').innerText = `${(yearlyGold * 5).toFixed(1)} گرم`;
+        }
+
+        // FAQ TOGGLE
+        function toggleFaq(id) {
+            const ans = document.getElementById(`faq-ans-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            if (ans.classList.contains('hidden')) {
+                ans.classList.remove('hidden');
+                icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+            } else {
+                ans.classList.add('hidden');
+                icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+            }
+        }
+
+        // RENDER FEATURED PRODUCTS ON HOME
+        function renderHomeFeaturedProducts() {
+            const container = document.getElementById('home-featured-products');
+            if (!container) return;
+            container.innerHTML = '';
+
+            AppState.products.slice(0, 4).forEach(p => {
+                const itemPrice = (p.weight * AppState.liveGoldPrice) * (1 + p.fee / 100);
+                container.innerHTML += `
+                    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition duration-300 overflow-hidden flex flex-col justify-between">
+                        <div>
+                            <div class="h-44 overflow-hidden relative">
+                                <img src="${p.img}" class="w-full h-full object-cover">
+                                <span class="absolute top-2 right-2 bg-gray-900/80 text-white text-[10px] px-2 py-0.5 rounded-md font-bold">کد: ${p.code}</span>
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <h4 class="font-bold text-gray-900 text-xs">${p.title}</h4>
+                                <div class="text-gold-700 font-black text-xs">
+                                    قیمت: ${formatNumber(itemPrice)} تومان
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0">
+                            <button onclick="addToCart(${p.id})" class="w-full bg-gold-50 text-gold-700 hover:bg-gold-500 hover:text-white border border-gold-200 font-bold py-2 rounded-xl transition text-xs">
+                                افزودن به سبد
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // CHART INITIALIZATION
+        function initChart() {
+            const ctx = document.getElementById('goldChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['۱۰:۰۰', '۱۱:۰۰', '۱۲:۰۰', '۱۳:۰۰', '۱۴:۰۰', '۱۵:۰۰', '۱۶:۰۰'],
+                    datasets: [{
+                        label: 'قیمت هر گرم طلای ۱۸ عیار (تومان)',
+                        data: [4810000, 4825000, 4820000, 4840000, 4835000, 4848000, 4850000],
+                        borderColor: '#D4AF37',
+                        backgroundColor: 'rgba(212, 175, 55, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { grid: { color: 'rgba(0,0,0,0.05)' } }
+                    }
+                }
+            });
+        }
+
+        // TICKERS & CALCULATIONS
+        function updateLiveTickers() {
+            const formatted = formatNumber(AppState.liveGoldPrice);
+            document.getElementById('ticker-price').innerText = `${formatted} تومان`;
+            document.getElementById('chart-current-price').innerText = `${formatted} تومان`;
+            document.getElementById('piggy-gram-price-display').innerText = `${formatted} تومان`;
+            document.getElementById('ticker-mazne').innerText = formatNumber(AppState.liveGoldPrice * 4.33);
+            updateHomeSavingsCalculator();
+        }
+
+        function formatNumber(num) {
+            return new Intl.NumberFormat('fa-IR').format(Math.round(num));
+        }
+
+        // AUTHENTICATION
+        function openLoginModal() {
+            document.getElementById('login-modal').classList.remove('hidden');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').classList.add('hidden');
+        }
+
+        function processLogin() {
+            const phone = document.getElementById('user-phone-input').value.trim();
+            if (!phone || phone.length < 10) {
+                alert('لطفاً شماره همراه معتبر وارد کنید.');
+                return;
+            }
+
+            AppState.currentUser = { phone: phone, goldWeight: 0.000 };
+            closeLoginModal();
+            updateUserAuthUI();
+
+            if (phone === AppState.adminPhone) {
+                document.getElementById('admin-nav-link').classList.remove('hidden');
+                alert('خوش آمدید مدیر گرامی! پنل مدیریت فعال شد.');
+            } else {
+                alert(`ورود با موفقیت انجام شد.`);
+            }
+        }
+
+        function updateUserAuthUI() {
+            const container = document.getElementById('user-auth-btn-container');
+            if (AppState.currentUser) {
+                container.innerHTML = `
+                    <div class="flex items-center gap-2 bg-gold-50 border border-gold-200 px-3 py-1.5 rounded-xl text-xs font-bold text-gray-800">
+                        <i class="fa-solid fa-user-check text-gold-600"></i>
+                        <span>${AppState.currentUser.phone}</span>
+                    </div>
+                `;
+            }
+        }
+
+        // PIGGY BANK LOGIC
+        function calculatePiggyBuy() {
+            const weight = parseFloat(document.getElementById('buy-weight-input').value) || 0;
+            const total = weight * AppState.liveGoldPrice;
+            document.getElementById('buy-toman-input').value = total ? Math.round(total) : '';
+            document.getElementById('piggy-total-pay').innerText = `${formatNumber(total)} تومان`;
+            AppState.tempPiggyBuy = { weight, total };
+        }
+
+        function calculatePiggyBuyFromToman() {
+            const toman = parseFloat(document.getElementById('buy-toman-input').value) || 0;
+            const weight = toman / AppState.liveGoldPrice;
+            document.getElementById('buy-weight-input').value = weight ? weight.toFixed(3) : '';
+            document.getElementById('piggy-total-pay').innerText = `${formatNumber(toman)} تومان`;
+            AppState.tempPiggyBuy = { weight, total: toman };
+        }
+
+        function submitPiggyBankPurchase() {
+            if (!AppState.currentUser) { openLoginModal(); return; }
+            if (!AppState.tempPiggyBuy || AppState.tempPiggyBuy.weight <= 0) {
+                alert('لطفاً مقدار معتبری برای خرید وارد کنید.');
+                return;
+            }
+
+            document.getElementById('modal-receipt-amount').innerText = `${formatNumber(AppState.tempPiggyBuy.total)} تومان`;
+            document.getElementById('modal-receipt-weight').innerText = `${AppState.tempPiggyBuy.weight.toFixed(3)} گرم`;
+            document.getElementById('receipt-card-display').value = AppState.adminCardNumber;
+            document.getElementById('receipt-modal').classList.remove('hidden');
+        }
+
+        function closeReceiptModal() {
+            document.getElementById('receipt-modal').classList.add('hidden');
+        }
+
+        function confirmSubmitReceipt() {
+            const receiptData = {
+                id: Date.now(),
+                userPhone: AppState.currentUser.phone,
+                weight: AppState.tempPiggyBuy.weight,
+                amount: AppState.tempPiggyBuy.total,
+                status: 'pending'
+            };
+
+            AppState.pendingReceipts.push(receiptData);
+            closeReceiptModal();
+            renderAdminPanel();
+            alert('رسید شما برای ادمین ارسال شد.');
+        }
+
+        function updateUserWalletDisplay() {
+            if (!AppState.currentUser) return;
+            document.getElementById('user-gold-weight').innerText = AppState.currentUser.goldWeight.toFixed(3);
+            const val = AppState.currentUser.goldWeight * AppState.liveGoldPrice;
+            document.getElementById('user-gold-value').innerText = `${formatNumber(val)} تومان`;
+        }
+
+        // SHOP LOGIC
+        function renderProducts(category = 'all') {
+            const grid = document.getElementById('products-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            const filtered = category === 'all' ? AppState.products : AppState.products.filter(p => p.category === category);
+
+            filtered.forEach(p => {
+                const itemPrice = (p.weight * AppState.liveGoldPrice) * (1 + p.fee / 100);
+                grid.innerHTML += `
+                    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition duration-300 overflow-hidden flex flex-col justify-between">
+                        <div>
+                            <div class="h-48 overflow-hidden relative">
+                                <img src="${p.img}" class="w-full h-full object-cover">
+                                <span class="absolute top-3 right-3 bg-gray-900/80 text-white text-[10px] px-2.5 py-1 rounded-full font-bold">کد: ${p.code}</span>
+                            </div>
+                            <div class="p-4 space-y-2">
+                                <h4 class="font-bold text-gray-900 text-sm">${p.title}</h4>
+                                <div class="flex justify-between text-xs text-gray-500">
+                                    <span>وزن: <strong>${p.weight} گرم</strong></span>
+                                    <span>اجرت: <strong>${p.fee}%</strong></span>
+                                </div>
+                                <div class="text-gold-700 font-black text-sm pt-2">
+                                    قیمت تقریبی: ${formatNumber(itemPrice)} تومان
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0">
+                            <button onclick="addToCart(${p.id})" class="w-full bg-gold-50 text-gold-700 hover:bg-gold-500 hover:text-white border border-gold-200 font-bold py-2.5 rounded-xl transition text-xs flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cart-plus"></i>
+                                افزودن به سبد خرید
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function filterShopCategory(cat) {
+            renderProducts(cat);
+        }
+
+        function addToCart(prodId) {
+            const item = AppState.products.find(p => p.id === prodId);
+            if (item) {
+                AppState.cart.push(item);
+                updateCartUI();
+                alert(`"${item.title}" به سبد خرید اضافه شد.`);
+            }
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-badge').innerText = AppState.cart.length;
+            const container = document.getElementById('cart-items-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            let totalW = 0;
+            let totalP = 0;
+
+            if (AppState.cart.length === 0) {
+                container.innerHTML = `<div class="bg-white p-8 rounded-2xl text-center text-gray-400 text-sm">سبد خرید شما خالی است.</div>`;
+            } else {
+                AppState.cart.forEach((item, index) => {
+                    const price = (item.weight * AppState.liveGoldPrice) * (1 + item.fee / 100);
+                    totalW += item.weight;
+                    totalP += price;
+
+                    container.innerHTML += `
+                        <div class="bg-white p-4 rounded-2xl border border-gray-100 flex items-center justify-between gap-4">
+                            <img src="${item.img}" class="w-16 h-16 rounded-xl object-cover">
+                            <div class="flex-1 space-y-1">
+                                <h4 class="font-bold text-sm text-gray-900">${item.title}</h4>
+                                <span class="text-xs text-gray-500">وزن: ${item.weight} گرم | کد: ${item.code}</span>
+                            </div>
+                            <div class="text-left">
+                                <span class="font-bold text-sm text-gray-900 block">${formatNumber(price)} تومان</span>
+                                <button onclick="removeFromCart(${index})" class="text-xs text-red-500 hover:underline">حذف</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById('cart-total-weight').innerText = `${totalW.toFixed(3)} گرم`;
+            document.getElementById('cart-total-price').innerText = `${formatNumber(totalP)} تومان`;
+        }
+
+        function removeFromCart(index) {
+            AppState.cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        // INQUIRY & ADMIN
+        function requestInquiryFromAdmin() {
+            if (!AppState.currentUser) { openLoginModal(); return; }
+            if (AppState.cart.length === 0) { alert('سبد خرید خالی است.'); return; }
+
+            const inquiry = {
+                id: Date.now(),
+                userPhone: AppState.currentUser.phone,
+                itemCount: AppState.cart.length,
+                status: 'pending'
+            };
+
+            AppState.pendingInquiries.push(inquiry);
+            renderAdminPanel();
+            alert('نوتیفیکیشن استعلام موجودی برای ادمین ارسال شد.');
+        }
+
+        function renderAdminPanel() {
+            const inqList = document.getElementById('admin-inquiries-list');
+            if (inqList) {
+                inqList.innerHTML = '';
+                AppState.pendingInquiries.forEach(inq => {
+                    inqList.innerHTML += `
+                        <div class="p-3 bg-gray-50 rounded-xl border border-gray-200 space-y-2">
+                            <div class="flex justify-between"><strong>کاربر: ${inq.userPhone}</strong> <span>تعداد: ${inq.itemCount} آیتم</span></div>
+                            <button onclick="approveInquiry(${inq.id})" class="w-full bg-emerald-600 text-white font-bold py-1.5 rounded-lg text-xs">تایید موجودی و قیمت</button>
+                        </div>
+                    `;
+                });
+            }
+
+            const recList = document.getElementById('admin-receipts-list');
+            if (recList) {
+                recList.innerHTML = '';
+                AppState.pendingReceipts.forEach(rec => {
+                    if (rec.status === 'pending') {
+                        recList.innerHTML += `
+                            <div class="p-3 bg-gray-50 rounded-xl border border-gray-200 space-y-2">
+                                <div>کاربر: <strong>${rec.userPhone}</strong></div>
+                                <div>وزن: <strong>${rec.weight.toFixed(3)} گرم</strong> (${formatNumber(rec.amount)} تومان)</div>
+                                <button onclick="approveReceipt(${rec.id})" class="w-full bg-gold-500 text-white font-bold py-1.5 rounded-lg text-xs">تایید و شارژ کیف پول</button>
+                            </div>
+                        `;
+                    }
+                });
+            }
+        }
+
+        function approveInquiry(inqId) {
+            const inq = AppState.pendingInquiries.find(i => i.id === inqId);
+            if (inq) {
+                inq.status = 'approved';
+                alert('استعلام تایید شد.');
+                const area = document.getElementById('checkout-action-area');
+                if (area) {
+                    area.innerHTML = `
+                        <button onclick="openCheckoutModal()" class="w-full gold-gradient text-gray-900 font-black py-4 rounded-xl shadow-lg text-sm">
+                            تکمیل خرید و پرداخت
+                        </button>
+                    `;
+                }
+            }
+        }
+
+        function approveReceipt(recId) {
+            const rec = AppState.pendingReceipts.find(r => r.id === recId);
+            if (rec) {
+                rec.status = 'approved';
+                if (AppState.currentUser && AppState.currentUser.phone === rec.userPhone) {
+                    AppState.currentUser.goldWeight += rec.weight;
+                    updateUserWalletDisplay();
+                }
+                renderAdminPanel();
+                alert('طلا به کیف پول کاربر اضافه شد.');
+            }
+        }
+
+        function updateAdminCardNumber() {
+            const newCard = document.getElementById('admin-card-input').value.trim();
+            if (newCard) {
+                AppState.adminCardNumber = newCard;
+                document.getElementById('display-admin-card').innerText = newCard;
+                alert('شماره کارت جدید ذخیره شد.');
+            }
+        }
+
+        function addNewProductFromAdmin() {
+            const title = document.getElementById('new-prod-title').value;
+            const code = document.getElementById('new-prod-code').value;
+            const weight = parseFloat(document.getElementById('new-prod-weight').value);
+            const fee = parseFloat(document.getElementById('new-prod-fee').value);
+            const category = document.getElementById('new-prod-cat').value;
+            const img = document.getElementById('new-prod-img').value || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80';
+
+            if (title && code && weight) {
+                AppState.products.push({ id: Date.now(), code, title, category, weight, fee: fee || 0, img });
+                renderProducts();
+                renderHomeFeaturedProducts();
+                alert('محصول جدید اضافه شد.');
+            }
+        }
+
+        function openCheckoutModal() { document.getElementById('checkout-modal').classList.remove('hidden'); }
+        function closeCheckoutModal() { document.getElementById('checkout-modal').classList.add('hidden'); }
+
+        function finalizePurchaseOrder() {
+            const method = document.querySelector('input[name="pay-method"]:checked').value;
+            let totalWeightNeeded = 0;
+            AppState.cart.forEach(item => totalWeightNeeded += item.weight);
+
+            if (method === 'wallet') {
+                if (!AppState.currentUser || AppState.currentUser.goldWeight < totalWeightNeeded) {
+                    alert('موجودی کیف پول طلای شما کافی نیست! ابتدا قلک طلا را شارژ کنید.');
+                    return;
+                }
+                AppState.currentUser.goldWeight -= totalWeightNeeded;
+                updateUserWalletDisplay();
+            }
+
+            alert('سفارش شما با موفقیت ثبت گردید.');
+            AppState.cart = [];
+            updateCartUI();
+            closeCheckoutModal();
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text);
+            alert('شماره کارت کپی شد.');
+        }
+
+        function copyInviteLink() {
+            const val = document.getElementById('invite-link-input').value;
+            navigator.clipboard.writeText(val);
+            alert('لینک دعوت کپی شد.');
+        }
+    </script>
+</body>
+</html>
