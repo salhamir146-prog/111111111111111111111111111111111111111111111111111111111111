@@ -3,141 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قصر جواهر  | خرید، فروش و پس‌انداز آنلاین طلای آب‌شده و مصنوعات </title>
-    <!-- Tailwind CSS -->
+    <title>قصر جواهر | خرید، فروش و پس‌انداز آنلاین طلای آب‌شده و مصنوعات</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Vazirmatn Font -->
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
-    <!-- Chart.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/aj.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+ax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
+                        onyx: { DEFAULT: '#0B0A10', 2: '#131019', 3: '#1B1723' },
+                        ivory: '#FBF7ED',
                         gold: {
-                            50: '#FAF8F0',
-                            100: '#F5F0D8',
-                            200: '#EADFA9',
-                            300: '#E6CB78',
-                            400: '#DFB752',
-                            500: '#D4AF37',
-                            600: '#B8860B',
-                            700: '#8B6508',
-                            800: '#634704',
-                            900: '#3D2B02',
+                            50: '#FDF9EC', 100: '#F8EFC9', 200: '#F0DE96', 300: '#E7C960',
+                            400: '#D9B23E', 500: '#C9A227', 600: '#A9821A', 700: '#836313',
+                            800: '#5C450D', 900: '#382908',
                         },
-                        darkGold: '#1F1A0A',
+                        jade: { DEFAULT: '#0E4B3B', light: '#1B7A5F' },
+                        ruby: { DEFAULT: '#6B1220', light: '#9A1F33' },
                     },
-                    fontFamily: {
-                        sans: ['Vazirmatn', 'sans-serif'],
+                    fontFamily: { sans: ['Vazirmatn', 'sans-serif'] },
+                    boxShadow: {
+                        gold: '0 10px 40px -10px rgba(201,162,39,0.45)',
+                        goldsm: '0 4px 18px -6px rgba(201,162,39,0.5)',
                     }
                 }
             }
         }
     </script>
     <style>
+        :root{
+            --gold-1:#C9A227; --gold-2:#F3D57C; --gold-3:#8A6B12; --onyx:#0B0A10; --jade:#0E4B3B;
+        }
+        *{ scroll-behavior: smooth; }
         body {
             font-family: 'Vazirmatn', sans-serif;
-            background-color: #FAF9F5;
-            color: #1F2937;
+            background-color: #FBF7ED;
+            color: #201C12;
             -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
         }
-        .gold-gradient {
-            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
+        ::selection{ background:#C9A227; color:#0B0A10; }
+
+        /* ===== Gold gradients & textures ===== */
+        .gold-gradient { background: linear-gradient(120deg,#8A6B12 0%,#F3D57C 22%,#C9A227 45%,#FCEFB0 65%,#A9821A 85%,#F3D57C 100%); background-size: 220% 220%; animation: goldShift 7s ease-in-out infinite; }
+        @keyframes goldShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+        .gold-text { background: linear-gradient(100deg,#A9821A,#F3D57C 40%,#C9A227 60%,#F8EFC9); -webkit-background-clip:text; background-clip:text; color:transparent; }
+        .noise-overlay::before{
+            content:''; position:absolute; inset:0; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+            background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         }
-        .gold-gradient-soft {
-            background: linear-gradient(135deg, #fefce8 0%, #fffbeb 50%, #fef3c7 100%);
-        }
-        .gold-border {
-            border-image: linear-gradient(to right, #D4AF37, #FFDF73, #B8860B) 1;
-        }
-        .glass-header {
-            background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(14px);
-        }
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        /* Range slider customization */
+        .glass-header { background: rgba(11,10,16,0.72); backdrop-filter: blur(18px) saturate(140%); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        input[type=range]{ -webkit-appearance:none; height:6px; border-radius:99px; background: linear-gradient(90deg,#C9A227,#F3D57C); }
         input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 22px;
-            width: 22px;
-            border-radius: 50%;
-            background: #B8860B;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(184, 134, 11, 0.5);
+            -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%,#FCEFB0,#C9A227 60%,#8A6B12);
+            cursor: pointer; border:2px solid #fff; box-shadow: 0 0 0 4px rgba(201,162,39,0.25), 0 4px 12px rgba(0,0,0,.3);
+            transition: transform .15s ease;
+        }
+        input[type=range]::-webkit-slider-thumb:hover{ transform: scale(1.15); }
+
+        /* ===== Ornamental corner frame (signature motif) ===== */
+        .ornate-frame{ position:relative; }
+        .ornate-frame::before, .ornate-frame::after,
+        .ornate-frame .cf-tl, .ornate-frame .cf-tr, .ornate-frame .cf-bl, .ornate-frame .cf-br { pointer-events:none; }
+        .corner-motif{ position:absolute; width:34px; height:34px; opacity:.85; }
+        .corner-motif svg{ width:100%; height:100%; }
+        .cf-tl{ top:10px; left:10px; }
+        .cf-tr{ top:10px; right:10px; transform:scaleX(-1); }
+        .cf-bl{ bottom:10px; left:10px; transform:scaleY(-1); }
+        .cf-br{ bottom:10px; right:10px; transform:scale(-1,-1); }
+
+        /* ===== Buttons: shimmer sweep ===== */
+        .btn-shimmer{ position:relative; overflow:hidden; isolation:isolate; }
+        .btn-shimmer::after{
+            content:''; position:absolute; inset:0; z-index:1; background:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.55) 40%,transparent 60%);
+            transform:translateX(-120%); transition:transform .7s cubic-bezier(.2,.7,.3,1);
+        }
+        .btn-shimmer:hover::after{ transform:translateX(120%); }
+
+        /* ===== Card hover lift + glow ===== */
+        .lux-card{ transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s ease, border-color .45s ease; }
+        .lux-card:hover{ transform: translateY(-6px); box-shadow: 0 20px 45px -18px rgba(201,162,39,.45); border-color:#E7C960; }
+
+        /* ===== Scroll reveal ===== */
+        .reveal{ opacity:0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+        .reveal.in{ opacity:1; transform:translateY(0); }
+        .reveal-stagger > * { transition-delay: calc(var(--i,0) * 90ms); }
+
+        /* ===== Ticker flash ===== */
+        .flash-up{ animation: flashUp .9s ease; }
+        .flash-down{ animation: flashDown .9s ease; }
+        @keyframes flashUp{ 0%{ color:#34D399; } 100%{ color:inherit; } }
+        @keyframes flashDown{ 0%{ color:#F87171; } 100%{ color:inherit; } }
+
+        /* ===== Floating sparkle particles in hero ===== */
+        #hero-canvas{ position:absolute; inset:0; z-index:0; opacity:.55; }
+
+        /* ===== Skeleton shimmer ===== */
+        .skeleton{ position:relative; overflow:hidden; background:#EFE7CE; }
+        .skeleton::after{ content:''; position:absolute; inset:0; transform:translateX(-100%);
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);
+            animation: shimmerSlide 1.3s infinite; }
+        @keyframes shimmerSlide{ 100%{ transform:translateX(100%); } }
+
+        /* ===== Coin loader ===== */
+        .coin-spin{ animation: coinspin 1.4s linear infinite; transform-style:preserve-3d; }
+        @keyframes coinspin{ 0%{transform:rotateY(0)} 100%{transform:rotateY(360deg)} }
+
+        /* ===== Toasts ===== */
+        #toast-stack{ position:fixed; bottom:96px; left:50%; transform:translateX(-50%); z-index:[9999]; display:flex; flex-direction:column; gap:10px; width:min(92vw,380px); }
+        @media(min-width:1024px){ #toast-stack{ bottom:28px; } }
+        .toast{ pointer-events:auto; display:flex; align-items:center; gap:10px; background:#151119; color:#F8EFC9; border:1px solid rgba(201,162,39,.4);
+            padding:12px 16px; border-radius:16px; box-shadow:0 12px 30px -10px rgba(0,0,0,.5); font-size:12.5px; font-weight:700;
+            animation: toastIn .35s cubic-bezier(.2,.8,.2,1), toastOut .35s ease forwards; animation-delay:0s, 2.6s; }
+        @keyframes toastIn{ from{opacity:0; transform:translateY(14px) scale(.96);} to{opacity:1; transform:translateY(0) scale(1);} }
+        @keyframes toastOut{ from{opacity:1;} to{opacity:0; transform:translateY(-8px); } }
+
+        /* ===== Modal entrance ===== */
+        .modal-panel{ animation: modalIn .35s cubic-bezier(.2,.8,.2,1); }
+        @keyframes modalIn{ from{ opacity:0; transform:scale(.94) translateY(10px);} to{ opacity:1; transform:scale(1) translateY(0);} }
+        .modal-backdrop{ animation: fadeIn .25s ease; }
+        @keyframes fadeIn{ from{opacity:0} to{opacity:1} }
+
+        /* ===== Nav underline ===== */
+        .nav-btn{ position:relative; }
+        .nav-btn::after{ content:''; position:absolute; right:0; bottom:-6px; height:2px; width:0%; background:linear-gradient(90deg,#C9A227,#F3D57C); transition:width .35s ease; }
+        .nav-btn.active-nav::after{ width:100%; }
+
+        /* ===== Mobile nav pill ===== */
+        .nav-mobile-btn{ position:relative; }
+        .nav-mobile-pill{ position:absolute; inset:-6px -10px; border-radius:14px; background:linear-gradient(145deg,#FCEFB0,#E7C960); z-index:-1; opacity:0; transform:scale(.7); transition:all .3s cubic-bezier(.3,1.4,.4,1); }
+        .nav-mobile-btn.active-mobile .nav-mobile-pill{ opacity:1; transform:scale(1); }
+
+        /* ===== Category chip active pulse ===== */
+        .category-btn.active{ box-shadow:0 0 0 4px rgba(201,162,39,.18); }
+
+        /* ===== Progress ring ===== */
+        .ring-bg{ stroke:rgba(255,255,255,.12); }
+        .ring-fg{ stroke:url(#ringGrad); stroke-linecap:round; transition: stroke-dashoffset 1.1s cubic-bezier(.2,.8,.2,1); }
+
+        /* ===== Marquee trust strip ===== */
+        .marquee-track{ display:flex; width:max-content; animation: marquee 26s linear infinite; }
+        @keyframes marquee{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+        /* ===== Testimonial dots ===== */
+        .dot{ width:7px; height:7px; border-radius:99px; background:#E7D9A8; transition:all .3s ease; cursor:pointer; }
+        .dot.active{ width:22px; background:linear-gradient(90deg,#C9A227,#F3D57C); }
+
+        /* ===== FAQ chevron rotate ===== */
+        .faq-icon{ transition: transform .35s ease; }
+        .faq-icon.rot{ transform: rotate(180deg); }
+        .faq-panel{ display:grid; grid-template-rows:0fr; transition: grid-template-rows .38s cubic-bezier(.2,.7,.2,1); }
+        .faq-panel.open{ grid-template-rows:1fr; }
+        .faq-panel > div{ overflow:hidden; }
+
+        /* scrollbar (desktop) */
+        ::-webkit-scrollbar{ width:10px; }
+        ::-webkit-scrollbar-track{ background:#FBF7ED; }
+        ::-webkit-scrollbar-thumb{ background:linear-gradient(#E7C960,#A9821A); border-radius:99px; }
+
+        .focus-gold:focus-visible{ outline:3px solid #C9A227; outline-offset:2px; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
         }
     </style>
 </head>
 <body class="pb-24 lg:pb-0 min-h-screen flex flex-col justify-between selection:bg-gold-500 selection:text-white">
 
     <!-- Top Live Gold Ticker -->
-    <div class="bg-gray-950 text-gold-300 text-xs py-2 px-4 flex justify-between items-center border-b border-gold-600/30 sticky top-0 z-50">
-        <div class="flex items-center gap-3">
+    <div class="bg-onyx text-gold-200 text-[11px] sm:text-xs py-2.5 px-4 flex justify-between items-center border-b border-gold-600/25 sticky top-0 z-[60] relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 pointer-events-none gold-gradient"></div>
+        <div class="flex items-center gap-3 relative z-10">
             <span class="flex items-center gap-1.5 font-bold">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping inline-block"></span>
-                قیمت زنده طلا (۱۸ عیار):
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping absolute"></span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span class="mr-1">قیمت زنده طلا (۱۸ عیار):</span>
             </span>
-            <span id="ticker-price" class="font-bold text-white text-sm">۴,۸۵۰,۰۰۰ تومان</span>
-            <span id="ticker-change" class="text-emerald-400 font-bold text-[11px] bg-emerald-950/80 px-2 py-0.5 rounded-md border border-emerald-800/50">(+۱.۲%) 📈</span>
+            <span id="ticker-price" class="font-black text-white text-sm transition-colors">۴,۸۵۰,۰۰۰ تومان</span>
+            <span id="ticker-change" class="text-emerald-400 font-bold text-[11px] bg-emerald-950/70 px-2 py-0.5 rounded-md border border-emerald-800/50 transition-all">(+۱.۲٪) ▲</span>
         </div>
-        <div class="hidden sm:flex items-center gap-5 text-gray-300">
+        <div class="hidden sm:flex items-center gap-5 text-gray-400 relative z-10">
             <span>مظنه تهران: <strong class="text-white" id="ticker-mazne">۲۱,۰۰۰,۰۰۰</strong></span>
             <span>انس جهانی: <strong class="text-white">$۲,۴۱۰</strong></span>
-            <span class="text-gold-400 font-semibold"><i class="fa-solid fa-clock ml-1"></i> به‌روزرسانی آنی</span>
+            <span class="text-gold-300 font-semibold"><i class="fa-solid fa-satellite-dish ml-1 animate-pulse"></i> به‌روزرسانی آنی</span>
         </div>
     </div>
 
     <!-- Main Navigation Header -->
-    <header class="glass-header sticky top-8 z-40 border-b border-gray-100 shadow-sm transition-all duration-300">
+    <header id="site-header" class="glass-header sticky top-[38px] sm:top-9 z-50 border-b border-white/10 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <!-- Brand Logo -->
-            <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
-                <div class="w-12 h-12 rounded-2xl gold-gradient p-[2px] shadow-md flex items-center justify-center">
-                    <div class="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
-                        <i class="fa-solid fa-gem text-gold-600 text-xl"></i>
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="switchTab('home')">
+                <div class="w-12 h-12 rounded-2xl gold-gradient p-[2px] shadow-goldsm flex items-center justify-center transition-transform duration-300 group-hover:rotate-6">
+                    <div class="w-full h-full bg-onyx rounded-[14px] flex items-center justify-center">
+                        <i class="fa-solid fa-gem text-gold-300 text-xl"></i>
                     </div>
                 </div>
                 <div>
-                    <h1 class="text-xl font-black tracking-tight text-gray-900"> قصر جواهر </h1>
-                    <p class="text-[10px] text-gold-600 font-bold tracking-wide">پلتفرم هوشمند پس‌انداز و خرید طلا</p>
+                    <h1 class="text-xl font-black tracking-tight text-white">قصر جواهر</h1>
+                    <p class="text-[10px] gold-text font-bold tracking-wide">پلتفرم هوشمند پس‌انداز و خرید طلا</p>
                 </div>
             </div>
 
             <!-- Desktop Menu -->
-            <nav class="hidden lg:flex items-center gap-7 font-medium text-sm text-gray-700">
-                <button onclick="switchTab('home')" class="nav-btn transition hover:text-gold-600 font-bold text-gold-600" data-tab="home">خانه</button>
-                <button onclick="switchTab('live-price')" class="nav-btn transition hover:text-gold-600" data-tab="live-price">نمودار قیمت لحظه‌ای</button>
-                <button onclick="switchTab('piggy-bank')" class="nav-btn transition hover:text-gold-600 flex items-center gap-1.5" data-tab="piggy-bank">
-                    <i class="fa-solid fa-piggy-bank text-gold-500"></i>
+            <nav class="hidden lg:flex items-center gap-7 font-medium text-sm text-gray-300">
+                <button onclick="switchTab('home')" class="nav-btn transition hover:text-gold-300" data-tab="home">خانه</button>
+                <button onclick="switchTab('live-price')" class="nav-btn transition hover:text-gold-300" data-tab="live-price">نمودار قیمت لحظه‌ای</button>
+                <button onclick="switchTab('piggy-bank')" class="nav-btn transition hover:text-gold-300 flex items-center gap-1.5" data-tab="piggy-bank">
+                    <i class="fa-solid fa-piggy-bank text-gold-400"></i>
                     قلک طلا
                 </button>
-                <button onclick="switchTab('shop')" class="nav-btn transition hover:text-gold-600" data-tab="shop">خرید طلا (ویترین)</button>
-                <button onclick="switchTab('invite')" class="nav-btn transition hover:text-gold-600" data-tab="invite">دعوت از دوستان</button>
-                <button onclick="switchTab('about')" class="nav-btn transition hover:text-gold-600" data-tab="about">درباره ما</button>
-                <button id="admin-nav-link" onclick="switchTab('admin')" class="hidden nav-btn text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg font-bold border border-red-200 hover:bg-red-100 transition" data-tab="admin">
+                <button onclick="switchTab('shop')" class="nav-btn transition hover:text-gold-300" data-tab="shop">خرید طلا (ویترین)</button>
+                <button onclick="switchTab('invite')" class="nav-btn transition hover:text-gold-300" data-tab="invite">دعوت از دوستان</button>
+                <button onclick="switchTab('about')" class="nav-btn transition hover:text-gold-300" data-tab="about">درباره ما</button>
+                <button id="admin-nav-link" onclick="switchTab('admin')" class="hidden nav-btn text-xs bg-ruby/20 text-red-300 px-3 py-1.5 rounded-lg font-bold border border-ruby/50 hover:bg-ruby/30 transition" data-tab="admin">
                     <i class="fa-solid fa-user-shield ml-1"></i> پنل مدیریت
                 </button>
             </nav>
 
             <!-- Actions -->
             <div class="flex items-center gap-3">
-                <button onclick="switchTab('cart')" class="relative p-2.5 rounded-xl bg-gray-50 hover:bg-gold-50 text-gray-700 hover:text-gold-600 transition border border-gray-200/80">
+                <button onclick="switchTab('cart')" class="relative p-2.5 rounded-xl bg-white/5 hover:bg-gold-500/20 text-gray-200 hover:text-gold-300 transition border border-white/10 focus-gold">
                     <i class="fa-solid fa-bag-shopping text-lg"></i>
-                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-gold-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold shadow-sm">۰</span>
+                    <span id="cart-badge" class="absolute -top-1.5 -right-1.5 gold-gradient text-onyx text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-black shadow-sm">۰</span>
                 </button>
 
                 <div id="user-auth-btn-container">
-                    <button onclick="openLoginModal()" class="gold-gradient text-gray-950 font-black px-5 py-2.5 rounded-xl text-sm shadow-md hover:shadow-lg transition transform active:scale-95">
+                    <button onclick="openLoginModal()" class="btn-shimmer gold-gradient text-onyx font-black px-5 py-2.5 rounded-xl text-sm shadow-goldsm hover:shadow-gold transition transform active:scale-95 focus-gold">
                         ورود / ثبت‌نام
                     </button>
                 </div>
@@ -146,54 +245,55 @@
     </header>
 
     <!-- MAIN CONTENT CONTAINER -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-12">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-16">
 
-        <!-- ==================== PAGE 1: HOME (MASSIVELY EXPANDED) ==================== -->
+        <!-- ==================== PAGE 1: HOME ==================== -->
         <section id="page-home" class="tab-content space-y-16">
-            
+
             <!-- 1. Hero Banner Section -->
-            <div class="relative rounded-3xl overflow-hidden gold-gradient p-1 shadow-2xl">
-                <div class="bg-gradient-to-r from-gray-950 via-gray-900 to-gray-800 text-white rounded-[22px] p-8 sm:p-12 lg:p-16 relative overflow-hidden">
+            <div class="relative rounded-3xl overflow-hidden gold-gradient p-1 shadow-2xl reveal in">
+                <div class="bg-gradient-to-br from-onyx via-onyx-2 to-[#1B1723] text-white rounded-[22px] p-8 sm:p-12 lg:p-16 relative overflow-hidden noise-overlay">
+                    <canvas id="hero-canvas"></canvas>
                     <div class="absolute -left-10 -bottom-10 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                    <div class="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                    <div class="absolute top-0 right-0 w-80 h-80 bg-jade/20 rounded-full blur-3xl pointer-events-none"></div>
 
                     <div class="max-w-3xl space-y-6 relative z-10">
-                        <div class="inline-flex items-center gap-2 bg-gold-500/20 text-gold-300 border border-gold-500/40 px-4 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md">
+                        <div class="inline-flex items-center gap-2 bg-gold-500/10 text-gold-300 border border-gold-500/40 px-4 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md">
                             <i class="fa-solid fa-shield-halved text-gold-400"></i>
                             تحت نظارت اتحادیه طلا و جواهر و دارای نماد اعتماد الکترونیکی
                         </div>
 
                         <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight">
                             حفظ ارزش سرمایه با <br class="hidden sm:inline"/>
-                            <span class="text-transparent bg-clip-text gold-gradient">خرید آنلاین طلای آب‌شده</span>
+                            <span class="gold-text">خرید آنلاین طلای آب‌شده</span>
                         </h2>
 
                         <p class="text-gray-300 text-sm sm:text-base leading-relaxed font-normal">
-                            در «جواهری قصر» می‌توانید هر زمان که خواستید، حتی با کمترین بودجه (از ۵۰ هزار تومان یا ۱ صوت) طلای آب‌شده ۲۴ عیار بدون اجرت بپذیرید، رشد لحظه‌ای دارایی‌تان را مشاهده کنید و هر وقت مایل بودید آن را تحویل بگیرید یا تبدیل به زیورآلات کنید.
+                            در «قصر جواهر» می‌توانید هر زمان که خواستید، حتی با کمترین بودجه (از ۵۰ هزار تومان یا ۱ صوت) طلای آب‌شده ۲۴ عیار بدون اجرت بخرید، رشد لحظه‌ای دارایی‌تان را مشاهده کنید و هر وقت مایل بودید آن را تحویل بگیرید یا تبدیل به زیورآلات کنید.
                         </p>
 
                         <!-- Hero Stats Metrics -->
                         <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/10 max-w-lg">
                             <div>
-                                <span class="text-xl sm:text-2xl font-black text-gold-300 block">+۵۰,۰۰۰</span>
+                                <span class="text-xl sm:text-2xl font-black text-gold-300 block counter" data-target="50000" data-suffix="+">۰</span>
                                 <span class="text-[11px] text-gray-400">کاربر فعال</span>
                             </div>
                             <div>
-                                <span class="text-xl sm:text-2xl font-black text-gold-300 block">+۱۵۰ کیلو</span>
+                                <span class="text-xl sm:text-2xl font-black text-gold-300 block counter" data-target="150" data-suffix=" کیلو+">۰</span>
                                 <span class="text-[11px] text-gray-400">طلای معامله‌شده</span>
                             </div>
                             <div>
-                                <span class="text-xl sm:text-2xl font-black text-gold-300 block">۱۰۰٪</span>
+                                <span class="text-xl sm:text-2xl font-black text-gold-300 block counter" data-target="100" data-suffix="٪">۰</span>
                                 <span class="text-[11px] text-gray-400">ضمانت اصالت عیار</span>
                             </div>
                         </div>
 
                         <div class="flex flex-wrap gap-4 pt-2">
-                            <button onclick="switchTab('piggy-bank')" class="gold-gradient text-gray-950 font-black px-8 py-4 rounded-2xl shadow-xl hover:opacity-95 transition flex items-center gap-2 text-sm sm:text-base transform active:scale-95">
+                            <button onclick="switchTab('piggy-bank')" class="btn-shimmer gold-gradient text-onyx font-black px-8 py-4 rounded-2xl shadow-xl hover:opacity-95 transition flex items-center gap-2 text-sm sm:text-base transform active:scale-95 focus-gold">
                                 <i class="fa-solid fa-vault"></i>
                                 ورود به قلک طلا و خرید
                             </button>
-                            <button onclick="switchTab('shop')" class="bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold px-7 py-4 rounded-2xl hover:bg-white/20 transition text-sm sm:text-base">
+                            <button onclick="switchTab('shop')" class="bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold px-7 py-4 rounded-2xl hover:bg-white/20 transition text-sm sm:text-base focus-gold">
                                 <i class="fa-solid fa-store ml-2"></i>
                                 ویترین محصولات
                             </button>
@@ -202,8 +302,28 @@
                 </div>
             </div>
 
+            <!-- Trust Marquee -->
+            <div class="relative overflow-hidden rounded-2xl bg-onyx py-3 reveal">
+                <div class="marquee-track text-gold-300 text-xs font-bold gap-10 px-5">
+                    <span class="flex items-center gap-10">
+                        <span><i class="fa-solid fa-certificate ml-1"></i> عیار تضمینی ۷۵۰</span>
+                        <span><i class="fa-solid fa-bolt ml-1"></i> نقدشوندگی آنی</span>
+                        <span><i class="fa-solid fa-shield-check ml-1"></i> نماد اعتماد الکترونیکی</span>
+                        <span><i class="fa-solid fa-truck-fast ml-1"></i> تحویل فیزیکی شمش</span>
+                        <span><i class="fa-solid fa-percent ml-1"></i> بدون اجرت در قلک</span>
+                    </span>
+                    <span class="flex items-center gap-10" aria-hidden="true">
+                        <span><i class="fa-solid fa-certificate ml-1"></i> عیار تضمینی ۷۵۰</span>
+                        <span><i class="fa-solid fa-bolt ml-1"></i> نقدشوندگی آنی</span>
+                        <span><i class="fa-solid fa-shield-check ml-1"></i> نماد اعتماد الکترونیکی</span>
+                        <span><i class="fa-solid fa-truck-fast ml-1"></i> تحویل فیزیکی شمش</span>
+                        <span><i class="fa-solid fa-percent ml-1"></i> بدون اجرت در قلک</span>
+                    </span>
+                </div>
+            </div>
+
             <!-- 2. Live Market Quick Overview Grid -->
-            <div class="space-y-4">
+            <div class="space-y-4 reveal">
                 <div class="flex justify-between items-end">
                     <div>
                         <h3 class="text-xl font-black text-gray-900">وضعیت زنده تابلو طلا و سکه</h3>
@@ -214,39 +334,39 @@
                     </button>
                 </div>
 
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div class="bg-white p-5 rounded-2xl border border-gold-200/80 shadow-sm space-y-2">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 reveal-stagger">
+                    <div class="lux-card bg-white p-5 rounded-2xl border border-gold-200/80 shadow-sm space-y-2 reveal" style="--i:0">
                         <span class="text-xs font-bold text-gray-500 block">طلای ۱۸ عیار (گرم)</span>
                         <div class="flex justify-between items-baseline">
                             <span class="text-lg font-black text-gray-900">۴,۸۵۰,۰۰۰</span>
-                            <span class="text-xs font-bold text-emerald-600">+۱.۲% ⬆</span>
+                            <span class="text-xs font-bold text-emerald-600">+۱.۲٪ ▲</span>
                         </div>
                         <span class="text-[10px] text-gray-400 block">تومان</span>
                     </div>
 
-                    <div class="bg-white p-5 rounded-2xl border border-gold-200/80 shadow-sm space-y-2">
+                    <div class="lux-card bg-white p-5 rounded-2xl border border-gold-200/80 shadow-sm space-y-2 reveal" style="--i:1">
                         <span class="text-xs font-bold text-gray-500 block">طلای ۲۴ عیار (گرم)</span>
                         <div class="flex justify-between items-baseline">
                             <span class="text-lg font-black text-gray-900">۶,۴۶۰,۰۰۰</span>
-                            <span class="text-xs font-bold text-emerald-600">+۱.۱% ⬆</span>
+                            <span class="text-xs font-bold text-emerald-600">+۱.۱٪ ▲</span>
                         </div>
                         <span class="text-[10px] text-gray-400 block">تومان</span>
                     </div>
 
-                    <div class="bg-white p-5 rounded-2xl border border-gold-200/80 shadow-sm space-y-2">
+                    <div class="lux-card bg-white p-5 rounded-2xl border border-gold-200/80 shadow-sm space-y-2 reveal" style="--i:2">
                         <span class="text-xs font-bold text-gray-500 block">مظنه طلا (مثقال)</span>
                         <div class="flex justify-between items-baseline">
                             <span class="text-lg font-black text-gray-900">۲۱,۰۰۰,۰۰۰</span>
-                            <span class="text-xs font-bold text-emerald-600">+۰.۹% ⬆</span>
+                            <span class="text-xs font-bold text-emerald-600">+۰.۹٪ ▲</span>
                         </div>
                         <span class="text-[10px] text-gray-400 block">تومان</span>
                     </div>
 
-                    <div class="bg-white p-5 rounded-2xl border border-gold-200/80 shadow-sm space-y-2">
+                    <div class="lux-card bg-white p-5 rounded-2xl border border-gold-200/80 shadow-sm space-y-2 reveal" style="--i:3">
                         <span class="text-xs font-bold text-gray-500 block">سکه امامی طرح جدید</span>
                         <div class="flex justify-between items-baseline">
                             <span class="text-lg font-black text-gray-900">۵۲,۳۰۰,۰۰۰</span>
-                            <span class="text-xs font-bold text-red-500">-۰.۴% ⬇</span>
+                            <span class="text-xs font-bold text-red-500">-۰.۴٪ ▼</span>
                         </div>
                         <span class="text-[10px] text-gray-400 block">تومان</span>
                     </div>
@@ -254,7 +374,12 @@
             </div>
 
             <!-- 3. Interactive Gold Savings Calculator -->
-            <div class="bg-white p-6 sm:p-10 rounded-3xl border border-gold-200/80 shadow-sm space-y-8">
+            <div class="ornate-frame reveal bg-white p-6 sm:p-10 rounded-3xl border border-gold-200/80 shadow-sm space-y-8 relative">
+                <span class="corner-motif cf-tl"><svg viewBox="0 0 40 40" fill="none"><path d="M2 2h14M2 2v14M2 2c10 0 16 6 16 16" stroke="#C9A227" stroke-width="2"/><circle cx="2" cy="2" r="2.5" fill="#C9A227"/></svg></span>
+                <span class="corner-motif cf-tr"><svg viewBox="0 0 40 40" fill="none"><path d="M2 2h14M2 2v14M2 2c10 0 16 6 16 16" stroke="#C9A227" stroke-width="2"/><circle cx="2" cy="2" r="2.5" fill="#C9A227"/></svg></span>
+                <span class="corner-motif cf-bl"><svg viewBox="0 0 40 40" fill="none"><path d="M2 2h14M2 2v14M2 2c10 0 16 6 16 16" stroke="#C9A227" stroke-width="2"/><circle cx="2" cy="2" r="2.5" fill="#C9A227"/></svg></span>
+                <span class="corner-motif cf-br"><svg viewBox="0 0 40 40" fill="none"><path d="M2 2h14M2 2v14M2 2c10 0 16 6 16 16" stroke="#C9A227" stroke-width="2"/><circle cx="2" cy="2" r="2.5" fill="#C9A227"/></svg></span>
+
                 <div class="text-center max-w-2xl mx-auto space-y-2">
                     <span class="text-xs font-bold text-gold-600 bg-gold-50 px-3 py-1 rounded-full border border-gold-200">پیش‌بینی هوشمند پس‌انداز</span>
                     <h3 class="text-2xl font-black text-gray-900">اگر ماهانه طلا بخرید، در آینده چقدر دارایی دارید؟</h3>
@@ -269,7 +394,7 @@
                                 <span>مبلغ پس‌انداز ماهانه شما:</span>
                                 <span id="calc-monthly-label" class="text-gold-700 font-black">۲,۰۰۰,۰۰۰ تومان</span>
                             </div>
-                            <input id="calc-range" type="range" min="100000" max="20000000" step="100000" value="2000000" oninput="updateHomeSavingsCalculator()" class="w-full h-2 bg-gold-200 rounded-lg appearance-none cursor-pointer">
+                            <input id="calc-range" type="range" min="100000" max="20000000" step="100000" value="2000000" oninput="updateHomeSavingsCalculator()" class="w-full focus-gold">
                             <div class="flex justify-between text-[10px] text-gray-400 mt-1 font-bold">
                                 <span>۱۰۰ هزار تومان</span>
                                 <span>۲۰ میلیون تومان</span>
@@ -283,49 +408,49 @@
                             </div>
                             <div class="flex justify-between text-xs text-gray-600 border-t border-gray-100 pt-2">
                                 <span>مجموع طلا در پایان ۱ سال:</span>
-                                <strong id="calc-yearly-gold" class="text-gold-600 font-bold">۴.948 گرم</strong>
+                                <strong id="calc-yearly-gold" class="text-gold-600 font-bold">۴.۹۴۸ گرم</strong>
                             </div>
                         </div>
                     </div>
 
                     <!-- Output Forecast Cards -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div class="bg-white p-4 rounded-xl border border-gold-200 text-center space-y-2 shadow-sm">
+                        <div class="lux-card bg-white p-4 rounded-xl border border-gold-200 text-center space-y-2 shadow-sm">
                             <span class="text-[11px] font-bold text-gray-500 block">افق ۱ ساله</span>
                             <span id="calc-res-1y" class="text-base font-black text-gray-900 block">۴.۹ گرم</span>
                             <span class="text-[10px] text-emerald-600 font-bold block">رشد مطمئن</span>
                         </div>
-                        <div class="bg-white p-4 rounded-xl border border-gold-200 text-center space-y-2 shadow-sm">
+                        <div class="lux-card bg-white p-4 rounded-xl border border-gold-200 text-center space-y-2 shadow-sm">
                             <span class="text-[11px] font-bold text-gray-500 block">افق ۳ ساله</span>
                             <span id="calc-res-3y" class="text-base font-black text-gray-900 block">۱۴.۸ گرم</span>
                             <span class="text-[10px] text-emerald-600 font-bold block">پوشش تورم عالی</span>
                         </div>
-                        <div class="bg-gold-500 text-white p-4 rounded-xl text-center space-y-2 shadow-md">
-                            <span class="text-[11px] font-bold text-gold-100 block">افق ۵ ساله</span>
-                            <span id="calc-res-5y" class="text-base font-black text-white block">۲۴.۷ گرم</span>
-                            <span class="text-[10px] text-gold-200 font-bold block">استقلال مالی</span>
+                        <div class="lux-card gold-gradient text-onyx p-4 rounded-xl text-center space-y-2 shadow-md">
+                            <span class="text-[11px] font-bold text-onyx/70 block">افق ۵ ساله</span>
+                            <span id="calc-res-5y" class="text-base font-black text-onyx block">۲۴.۷ گرم</span>
+                            <span class="text-[10px] text-onyx/70 font-bold block">استقلال مالی</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 4. Why Choose Motamedi Gold? (6 Value Cards) -->
-            <div class="space-y-8">
+            <!-- 4. Why Choose قصر جواهر -->
+            <div class="space-y-8 reveal">
                 <div class="text-center max-w-2xl mx-auto space-y-2">
-                    <h3 class="text-2xl font-black text-gray-900">چرا سرمایه‌گذاری در طلای معتمدی؟</h3>
+                    <h3 class="text-2xl font-black text-gray-900">چرا سرمایه‌گذاری در قصر جواهر؟</h3>
                     <p class="text-xs text-gray-500">مزایای منحصر‌به‌فردی که ما را به انتخاب اول خریداران طلا تبدیل کرده است.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-2xl border border-gold-100 shadow-sm hover:shadow-md transition space-y-3">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-stagger">
+                    <div class="lux-card bg-white p-6 rounded-2xl border border-gold-100 shadow-sm space-y-3 reveal" style="--i:0">
                         <div class="w-12 h-12 bg-gold-50 rounded-2xl flex items-center justify-center text-gold-600 text-xl font-bold">
                             <i class="fa-solid fa-stamp"></i>
                         </div>
                         <h4 class="font-bold text-gray-900 text-base">ضمانت اصالت عیار (۷۵۰)</h4>
-                        <p class="text-gray-500 text-xs leading-relaxed">تمامی طلای ارائه شده دارای انگ و آزمایشگاهی معتبر ریگیری بوده و همراه با فاکتور رسمی صادر می‌شود.</p>
+                        <p class="text-gray-500 text-xs leading-relaxed">تمامی طلای ارائه‌شده دارای انگ و آزمایشگاه معتبر ری‌گیری بوده و همراه با فاکتور رسمی صادر می‌شود.</p>
                     </div>
 
-                    <div class="bg-white p-6 rounded-2xl border border-gold-100 shadow-sm hover:shadow-md transition space-y-3">
+                    <div class="lux-card bg-white p-6 rounded-2xl border border-gold-100 shadow-sm space-y-3 reveal" style="--i:1">
                         <div class="w-12 h-12 bg-gold-50 rounded-2xl flex items-center justify-center text-gold-600 text-xl font-bold">
                             <i class="fa-solid fa-percent"></i>
                         </div>
@@ -333,7 +458,7 @@
                         <p class="text-gray-500 text-xs leading-relaxed">در بخش قلک طلا، شما فقط پول اصل طلا را می‌پردازید و هیچ اجرت یا مالیات اضافی پرداخت نمی‌کنید.</p>
                     </div>
 
-                    <div class="bg-white p-6 rounded-2xl border border-gold-100 shadow-sm hover:shadow-md transition space-y-3">
+                    <div class="lux-card bg-white p-6 rounded-2xl border border-gold-100 shadow-sm space-y-3 reveal" style="--i:2">
                         <div class="w-12 h-12 bg-gold-50 rounded-2xl flex items-center justify-center text-gold-600 text-xl font-bold">
                             <i class="fa-solid fa-rotate-left"></i>
                         </div>
@@ -341,15 +466,15 @@
                         <p class="text-gray-500 text-xs leading-relaxed">هر لحظه که بخواهید می‌توانید موجودی طلای خود را با قیمت زنده روز به پول نقد تبدیل کرده و در حساب بگیرید.</p>
                     </div>
 
-                    <div class="bg-white p-6 rounded-2xl border border-gold-100 shadow-sm hover:shadow-md transition space-y-3">
+                    <div class="lux-card bg-white p-6 rounded-2xl border border-gold-100 shadow-sm space-y-3 reveal" style="--i:3">
                         <div class="w-12 h-12 bg-gold-50 rounded-2xl flex items-center justify-center text-gold-600 text-xl font-bold">
                             <i class="fa-solid fa-box-archive"></i>
                         </div>
                         <h4 class="font-bold text-gray-900 text-base">امکان تحویل فیزیکی شمش</h4>
-                        <p class="text-gray-500 text-xs leading-relaxed">هر زمان طلای پس‌انداز شده شما به حد نصاب برسد، می‌توانید آن را به صورت شمش استاندارد تحویل بگیرید.</p>
+                        <p class="text-gray-500 text-xs leading-relaxed">هر زمان طلای پس‌انداز شده شما به حد نصاب برسد، می‌توانید آن را به‌صورت شمش استاندارد تحویل بگیرید.</p>
                     </div>
 
-                    <div class="bg-white p-6 rounded-2xl border border-gold-100 shadow-sm hover:shadow-md transition space-y-3">
+                    <div class="lux-card bg-white p-6 rounded-2xl border border-gold-100 shadow-sm space-y-3 reveal" style="--i:4">
                         <div class="w-12 h-12 bg-gold-50 rounded-2xl flex items-center justify-center text-gold-600 text-xl font-bold">
                             <i class="fa-solid fa-arrows-repeat"></i>
                         </div>
@@ -357,7 +482,7 @@
                         <p class="text-gray-500 text-xs leading-relaxed">طلای آب‌شده خود را بدون دغدغه و مستقیم با هر کدام از محصولات ویترین فروشگاه تعویض کنید.</p>
                     </div>
 
-                    <div class="bg-white p-6 rounded-2xl border border-gold-100 shadow-sm hover:shadow-md transition space-y-3">
+                    <div class="lux-card bg-white p-6 rounded-2xl border border-gold-100 shadow-sm space-y-3 reveal" style="--i:5">
                         <div class="w-12 h-12 bg-gold-50 rounded-2xl flex items-center justify-center text-gold-600 text-xl font-bold">
                             <i class="fa-solid fa-shield-cat"></i>
                         </div>
@@ -367,34 +492,35 @@
                 </div>
             </div>
 
-            <!-- 5. How It Works (4 Simple Steps) -->
-            <div class="bg-gradient-to-br from-gray-900 to-gray-950 text-white p-8 sm:p-12 rounded-3xl space-y-10 shadow-xl">
-                <div class="text-center max-w-xl mx-auto space-y-2">
+            <!-- 5. How It Works -->
+            <div class="reveal bg-gradient-to-br from-onyx to-onyx-2 text-white p-8 sm:p-12 rounded-3xl space-y-10 shadow-xl relative overflow-hidden noise-overlay">
+                <div class="absolute -top-20 -right-20 w-72 h-72 bg-gold-500/10 rounded-full blur-3xl"></div>
+                <div class="text-center max-w-xl mx-auto space-y-2 relative z-10">
                     <span class="text-gold-400 text-xs font-bold">چگونه شروع کنیم؟</span>
                     <h3 class="text-2xl font-black">۴ گام ساده تا ساخت قلک طلایی شما</h3>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10 space-y-3 relative">
-                        <span class="w-8 h-8 rounded-full bg-gold-500 text-gray-950 flex items-center justify-center font-black text-sm">۱</span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10 reveal-stagger">
+                    <div class="lux-card bg-white/5 p-6 rounded-2xl border border-white/10 space-y-3 relative reveal" style="--i:0">
+                        <span class="w-8 h-8 rounded-full gold-gradient text-onyx flex items-center justify-center font-black text-sm">۱</span>
                         <h4 class="font-bold text-sm text-gold-300">ثبت‌نام و ورود</h4>
                         <p class="text-xs text-gray-400 leading-relaxed">با شماره موبایل خود وارد شوید و حساب کاربری خود را در کمتر از ۱۰ ثانیه بسازید.</p>
                     </div>
 
-                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10 space-y-3 relative">
-                        <span class="w-8 h-8 rounded-full bg-gold-500 text-gray-950 flex items-center justify-center font-black text-sm">۲</span>
+                    <div class="lux-card bg-white/5 p-6 rounded-2xl border border-white/10 space-y-3 relative reveal" style="--i:1">
+                        <span class="w-8 h-8 rounded-full gold-gradient text-onyx flex items-center justify-center font-black text-sm">۲</span>
                         <h4 class="font-bold text-sm text-gold-300">تعیین مقدار طلا</h4>
                         <p class="text-xs text-gray-400 leading-relaxed">در بخش قلک، وزن یا مبلغ مورد نظرتان را وارد کرده و شماره کارت دریافت کنید.</p>
                     </div>
 
-                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10 space-y-3 relative">
-                        <span class="w-8 h-8 rounded-full bg-gold-500 text-gray-950 flex items-center justify-center font-black text-sm">۳</span>
+                    <div class="lux-card bg-white/5 p-6 rounded-2xl border border-white/10 space-y-3 relative reveal" style="--i:2">
+                        <span class="w-8 h-8 rounded-full gold-gradient text-onyx flex items-center justify-center font-black text-sm">۳</span>
                         <h4 class="font-bold text-sm text-gold-300">واریز و ارسال رسید</h4>
-                        <p class="text-xs text-gray-400 leading-relaxed">مبلغ را کارت به کارت نموده و عکس فیش واریزی را بارگذاری کنید تا ادمین تایید کند.</p>
+                        <p class="text-xs text-gray-400 leading-relaxed">مبلغ را کارت‌به‌کارت نموده و عکس فیش واریزی را بارگذاری کنید تا ادمین تایید کند.</p>
                     </div>
 
-                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10 space-y-3 relative">
-                        <span class="w-8 h-8 rounded-full bg-gold-500 text-gray-950 flex items-center justify-center font-black text-sm">۴</span>
+                    <div class="lux-card bg-white/5 p-6 rounded-2xl border border-white/10 space-y-3 relative reveal" style="--i:3">
+                        <span class="w-8 h-8 rounded-full gold-gradient text-onyx flex items-center justify-center font-black text-sm">۴</span>
                         <h4 class="font-bold text-sm text-gold-300">افزایش طلای کیف پول</h4>
                         <p class="text-xs text-gray-400 leading-relaxed">بلافاصله طلای خریده‌شده به کیف پول شما اضافه می‌شود و لحظه‌ای رشد می‌کند.</p>
                     </div>
@@ -402,7 +528,7 @@
             </div>
 
             <!-- 6. Featured Products Preview -->
-            <div class="space-y-6">
+            <div class="space-y-6 reveal">
                 <div class="flex justify-between items-end">
                     <div>
                         <h3 class="text-xl font-black text-gray-900">محصولات و زیورآلات منتخب</h3>
@@ -413,59 +539,26 @@
                     </button>
                 </div>
 
-                <div id="home-featured-products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Dynamic rendering via JS -->
-                </div>
+                <div id="home-featured-products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
             </div>
 
-            <!-- 7. Customer Reviews / Testimonials -->
-            <div class="space-y-6">
+            <!-- 7. Customer Reviews / Testimonials Carousel -->
+            <div class="space-y-6 reveal">
                 <div class="text-center max-w-xl mx-auto space-y-2">
-                    <h3 class="text-2xl font-black text-gray-900">نظرات همراهان قصر جواهر </h3>
+                    <h3 class="text-2xl font-black text-gray-900">نظرات همراهان قصر جواهر</h3>
                     <p class="text-xs text-gray-500">تجربه سرمایه‌گذاران و خریداران واقعی ما</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gold-100 flex items-center justify-center font-bold text-gold-800 text-xs">م‌ر</div>
-                            <div>
-                                <h5 class="font-bold text-xs text-gray-900">مهدی رضایی</h5>
-                                <span class="text-[10px] text-gray-400">سرمایه‌گذار از تهران</span>
-                            </div>
-                        </div>
-                        <p class="text-xs text-gray-600 leading-relaxed">«بهترین ویژگی قلک طلا اینه که هر ماه خرد خرد مثلاً با ۱ میلیون تومن طلا می‌خرم و نیازی نیست حتما پول یک سکه کامل رو داشته باشم.»</p>
-                        <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <div class="relative max-w-3xl mx-auto">
+                    <div id="testi-track" class="overflow-hidden rounded-2xl">
+                        <div id="testi-slides" class="flex transition-transform duration-500 ease-out"></div>
                     </div>
-
-                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gold-100 flex items-center justify-center font-bold text-gold-800 text-xs">س‌ام</div>
-                            <div>
-                                <h5 class="font-bold text-xs text-gray-900">سارا احمدی</h5>
-                                <span class="text-[10px] text-gray-400">خریدار مصنوعات</span>
-                            </div>
-                        </div>
-                        <p class="text-xs text-gray-600 leading-relaxed">«من طلای آب‌شده رو در قلک جمع کردم و بعدش با سرویس طلای البرناردو تعویض کردم. ارسالشون فوق‌العاده سریع و عالی بود.»</p>
-                        <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-gold-100 flex items-center justify-center font-bold text-gold-800 text-xs">ع‌ک</div>
-                            <div>
-                                <h5 class="font-bold text-xs text-gray-900">علیرضا کریمی</h5>
-                                <span class="text-[10px] text-gray-400">معامله‌گر طلا</span>
-                            </div>
-                        </div>
-                        <p class="text-xs text-gray-600 leading-relaxed">«پشتیبانی ادمین و تایید سریع رسیدها واقعا بی‌نظیره. قیمت‌ها دقیقا با نرخ بازار تهران به‌روز میشه.»</p>
-                        <div class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                    </div>
+                    <div id="testi-dots" class="flex justify-center gap-2 mt-5"></div>
                 </div>
             </div>
 
             <!-- 8. FAQ Accordion Section -->
-            <div class="bg-white p-6 sm:p-10 rounded-3xl border border-gold-200/80 shadow-sm space-y-6">
+            <div class="reveal bg-white p-6 sm:p-10 rounded-3xl border border-gold-200/80 shadow-sm space-y-6">
                 <div class="text-center max-w-xl mx-auto space-y-2">
                     <h3 class="text-2xl font-black text-gray-900">سوالات متداول شما</h3>
                     <p class="text-xs text-gray-500">پاسخ شفاف به پرسش‌های رایج کاربران</p>
@@ -473,39 +566,51 @@
 
                 <div class="max-w-3xl mx-auto space-y-3">
                     <div class="border border-gray-200 rounded-2xl overflow-hidden">
-                        <button onclick="toggleFaq(1)" class="w-full text-right p-4 font-bold text-xs sm:text-sm text-gray-800 bg-gray-50 flex justify-between items-center">
+                        <button onclick="toggleFaq(1)" class="w-full text-right p-4 font-bold text-xs sm:text-sm text-gray-800 bg-gray-50 flex justify-between items-center focus-gold">
                             <span>حداقل میزان خرید طلای آب‌شده در قلک چقدر است؟</span>
-                            <i id="faq-icon-1" class="fa-solid fa-chevron-down text-gold-600"></i>
+                            <i id="faq-icon-1" class="fa-solid fa-chevron-down text-gold-600 faq-icon"></i>
                         </button>
-                        <div id="faq-ans-1" class="hidden p-4 text-xs text-gray-600 leading-relaxed border-t border-gray-100">
-                            شما می‌توانید با هر مبلغی حتا ۵۰ هزار تومان یا ۱ صوت (۰.۰۰۱ گرم) طلا بخرید. هیچ محدودیتی در حداقل سرمایه‌گذاری وجود ندارد.
+                        <div id="faq-panel-1" class="faq-panel">
+                            <div>
+                                <div class="p-4 text-xs text-gray-600 leading-relaxed border-t border-gray-100">
+                                    شما می‌توانید با هر مبلغی حتی ۵۰ هزار تومان یا ۱ صوت (۰.۰۰۱ گرم) طلا بخرید. هیچ محدودیتی در حداقل سرمایه‌گذاری وجود ندارد.
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="border border-gray-200 rounded-2xl overflow-hidden">
-                        <button onclick="toggleFaq(2)" class="w-full text-right p-4 font-bold text-xs sm:text-sm text-gray-800 bg-gray-50 flex justify-between items-center">
+                        <button onclick="toggleFaq(2)" class="w-full text-right p-4 font-bold text-xs sm:text-sm text-gray-800 bg-gray-50 flex justify-between items-center focus-gold">
                             <span>آیا امکان تحویل فیزیکی طلای آب‌شده وجود دارد؟</span>
-                            <i id="faq-icon-2" class="fa-solid fa-chevron-down text-gold-600"></i>
+                            <i id="faq-icon-2" class="fa-solid fa-chevron-down text-gold-600 faq-icon"></i>
                         </button>
-                        <div id="faq-ans-2" class="hidden p-4 text-xs text-gray-600 leading-relaxed border-t border-gray-100">
-                            بله، هر زمان که مجموع طلای شما در قلک به حد نصاب شمش استاندارد (مثلاً ۵ گرم یا ۱۰ گرم) برسد، می‌توانید درخواست تحویل فیزیکی ثبت کنید.
+                        <div id="faq-panel-2" class="faq-panel">
+                            <div>
+                                <div class="p-4 text-xs text-gray-600 leading-relaxed border-t border-gray-100">
+                                    بله، هر زمان که مجموع طلای شما در قلک به حد نصاب شمش استاندارد (مثلاً ۵ گرم یا ۱۰ گرم) برسد، می‌توانید درخواست تحویل فیزیکی ثبت کنید.
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="border border-gray-200 rounded-2xl overflow-hidden">
-                        <button onclick="toggleFaq(3)" class="w-full text-right p-4 font-bold text-xs sm:text-sm text-gray-800 bg-gray-50 flex justify-between items-center">
+                        <button onclick="toggleFaq(3)" class="w-full text-right p-4 font-bold text-xs sm:text-sm text-gray-800 bg-gray-50 flex justify-between items-center focus-gold">
                             <span>عیار طلای آب‌شده چقدر است و چگونه تضمین می‌شود؟</span>
-                            <i id="faq-icon-3" class="fa-solid fa-chevron-down text-gold-600"></i>
+                            <i id="faq-icon-3" class="fa-solid fa-chevron-down text-gold-600 faq-icon"></i>
                         </button>
-                        <div id="faq-ans-3" class="hidden p-4 text-xs text-gray-600 leading-relaxed border-t border-gray-100">
-                            تمام طلاهای گالری معتمدی دارای عیار ۱۸ (۷۵۰ استاندارد) با کد ریگیری رسمی معتبر اتحادیه طلا و جواهر می‌باشند.
+                        <div id="faq-panel-3" class="faq-panel">
+                            <div>
+                                <div class="p-4 text-xs text-gray-600 leading-relaxed border-t border-gray-100">
+                                    تمام طلاهای گالری قصر جواهر دارای عیار ۱۸ (۷۵۰ استاندارد) با کد ری‌گیری رسمی معتبر اتحادیه طلا و جواهر می‌باشند.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 9. Educational Articles & Blog Cards -->
-            <div class="space-y-6">
+            <!-- 9. Educational Articles -->
+            <div class="space-y-6 reveal">
                 <div class="flex justify-between items-end">
                     <div>
                         <h3 class="text-xl font-black text-gray-900">مجله طلا و آموزش سرمایه‌گذاری</h3>
@@ -513,18 +618,18 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition">
-                        <img src="https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=600&q=80" class="w-full h-40 object-cover">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal-stagger">
+                    <div class="lux-card bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm reveal" style="--i:0">
+                        <div class="overflow-hidden h-40"><img src="https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110"></div>
                         <div class="p-5 space-y-2">
                             <span class="text-[10px] font-bold text-gold-600 bg-gold-50 px-2.5 py-1 rounded-md">آموزش طلا</span>
-                            <h4 class="font-bold text-sm text-gray-900">تفاوت طلای آب‌شده با سکه و طلای دست دوم چیست؟</h4>
+                            <h4 class="font-bold text-sm text-gray-900">تفاوت طلای آب‌شده با سکه و طلای دست‌دوم چیست؟</h4>
                             <p class="text-xs text-gray-500 leading-relaxed line-clamp-2">در این مقاله بررسی می‌کنیم چرا خرید طلای آب‌شده سودآوری بیشتری برای پس‌انداز دارد...</p>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition">
-                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" class="w-full h-40 object-cover">
+                    <div class="lux-card bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm reveal" style="--i:1">
+                        <div class="overflow-hidden h-40"><img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110"></div>
                         <div class="p-5 space-y-2">
                             <span class="text-[10px] font-bold text-gold-600 bg-gold-50 px-2.5 py-1 rounded-md">راهنمای پس‌انداز</span>
                             <h4 class="font-bold text-sm text-gray-900">چگونه با پول‌های خرد ماهانه طلا بخریم؟</h4>
@@ -532,8 +637,8 @@
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition">
-                        <img src="https://images.unsplash.com/photo-1535320903710-d993d3d77d29?auto=format&fit=crop&w=600&q=80" class="w-full h-40 object-cover">
+                    <div class="lux-card bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm reveal" style="--i:2">
+                        <div class="overflow-hidden h-40"><img src="https://images.unsplash.com/photo-1535320903710-d993d3d77d29?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110"></div>
                         <div class="p-5 space-y-2">
                             <span class="text-[10px] font-bold text-gold-600 bg-gold-50 px-2.5 py-1 rounded-md">تحلیل بازار</span>
                             <h4 class="font-bold text-sm text-gray-900">پیش‌بینی روند انس جهانی طلا و نرخ تورم</h4>
@@ -544,18 +649,18 @@
             </div>
 
             <!-- 10. Certificates & Trust Badges -->
-            <div class="bg-gold-50/60 p-6 rounded-3xl border border-gold-200 text-center space-y-4">
+            <div class="reveal bg-gold-50/60 p-6 rounded-3xl border border-gold-200 text-center space-y-4">
                 <span class="text-xs font-bold text-gold-800">دارای تمامی مجوزهای قانونی و رسمی</span>
                 <div class="flex flex-wrap justify-center items-center gap-8 pt-2">
-                    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-gold-200 shadow-sm text-xs font-bold text-gray-800">
+                    <div class="lux-card flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-gold-200 shadow-sm text-xs font-bold text-gray-800">
                         <i class="fa-solid fa-certificate text-gold-600 text-base"></i>
                         پروانه کسب اتحادیه طلا و جواهر
                     </div>
-                    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-gold-200 shadow-sm text-xs font-bold text-gray-800">
+                    <div class="lux-card flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-gold-200 shadow-sm text-xs font-bold text-gray-800">
                         <i class="fa-solid fa-shield-check text-gold-600 text-base"></i>
                         نماد اعتماد الکترونیکی (ای‌نماد)
                     </div>
-                    <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-gold-200 shadow-sm text-xs font-bold text-gray-800">
+                    <div class="lux-card flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-gold-200 shadow-sm text-xs font-bold text-gray-800">
                         <i class="fa-solid fa-lock text-gold-600 text-base"></i>
                         درگاه پرداخت امن بانکی
                     </div>
@@ -578,12 +683,8 @@
                     </div>
                 </div>
 
-                <!-- Chart Container -->
-                <div class="h-80 w-full">
-                    <canvas id="goldChart"></canvas>
-                </div>
+                <div class="h-80 w-full"><canvas id="goldChart"></canvas></div>
 
-                <!-- Price Table -->
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-right text-gray-600">
                         <thead class="bg-gold-50/50 text-gray-800 text-xs font-bold uppercase border-y border-gold-100">
@@ -595,22 +696,22 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
-                            <tr>
+                            <tr class="hover:bg-gold-50/40 transition">
                                 <td class="py-3.5 px-4 font-bold text-gray-900">طلای ۱۸ عیار (گرم)</td>
                                 <td class="py-3.5 px-4 font-semibold text-gray-800">۴,۸۵۰,۰۰۰</td>
-                                <td class="py-3.5 px-4 text-emerald-600 font-bold">+۱.۲%</td>
+                                <td class="py-3.5 px-4 text-emerald-600 font-bold">+۱.۲٪</td>
                                 <td class="py-3.5 px-4"><span class="bg-emerald-50 text-emerald-600 text-xs px-2.5 py-1 rounded-md font-bold">صعودی</span></td>
                             </tr>
-                            <tr>
+                            <tr class="hover:bg-gold-50/40 transition">
                                 <td class="py-3.5 px-4 font-bold text-gray-900">طلای آب‌شده (مثقال)</td>
                                 <td class="py-3.5 px-4 font-semibold text-gray-800">۲۱,۰۰۰,۰۰۰</td>
-                                <td class="py-3.5 px-4 text-emerald-600 font-bold">+۰.۹%</td>
+                                <td class="py-3.5 px-4 text-emerald-600 font-bold">+۰.۹٪</td>
                                 <td class="py-3.5 px-4"><span class="bg-emerald-50 text-emerald-600 text-xs px-2.5 py-1 rounded-md font-bold">صعودی</span></td>
                             </tr>
-                            <tr>
+                            <tr class="hover:bg-gold-50/40 transition">
                                 <td class="py-3.5 px-4 font-bold text-gray-900">سکه امامی طرح جدید</td>
                                 <td class="py-3.5 px-4 font-semibold text-gray-800">۵۲,۳۰۰,۰۰۰</td>
-                                <td class="py-3.5 px-4 text-red-500 font-bold">-۰.۴%</td>
+                                <td class="py-3.5 px-4 text-red-500 font-bold">-۰.۴٪</td>
                                 <td class="py-3.5 px-4"><span class="bg-red-50 text-red-600 text-xs px-2.5 py-1 rounded-md font-bold">اصلاحی</span></td>
                             </tr>
                         </tbody>
@@ -619,24 +720,36 @@
             </div>
         </section>
 
-        <!-- ==================== PAGE 3: PIGGY BANK (GHOLLAK) ==================== -->
+        <!-- ==================== PAGE 3: PIGGY BANK ==================== -->
         <section id="page-piggy-bank" class="tab-content hidden space-y-8">
             <!-- User Gold Wallet Card -->
             <div class="gold-gradient p-1 rounded-3xl shadow-xl">
-                <div class="bg-gray-950 text-white rounded-[22px] p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                    <div>
-                        <span class="text-xs font-bold text-gold-400 tracking-wider uppercase">دارایی فعلی شما در قلک معتمدی</span>
+                <div class="bg-onyx text-white rounded-[22px] p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative overflow-hidden noise-overlay">
+                    <div class="absolute -left-16 -bottom-16 w-72 h-72 bg-gold-500/10 rounded-full blur-3xl"></div>
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold text-gold-400 tracking-wider uppercase">دارایی فعلی شما در قلک قصر جواهر</span>
                         <div class="flex items-baseline gap-3 mt-2">
                             <h3 id="user-gold-weight" class="text-3xl sm:text-4xl font-black text-white">۰.۰۰۰</h3>
                             <span class="text-gold-400 font-bold text-lg">گرم طلای آب‌شده</span>
                         </div>
                         <p class="text-xs text-gray-400 mt-2">
-                            ارزش تقریبی ریالی (با نرخ زنده): 
+                            ارزش تقریبی ریالی (با نرخ زنده):
                             <strong id="user-gold-value" class="text-white font-bold">۰ تومان</strong>
                         </p>
+                        <div class="flex items-center gap-3 mt-4">
+                            <svg width="46" height="46" viewBox="0 0 46 46" class="shrink-0">
+                                <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F3D57C"/><stop offset="100%" stop-color="#C9A227"/></linearGradient></defs>
+                                <circle cx="23" cy="23" r="19" fill="none" stroke-width="4" class="ring-bg"></circle>
+                                <circle id="goal-ring" cx="23" cy="23" r="19" fill="none" stroke-width="4" class="ring-fg" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90 23 23)"></circle>
+                            </svg>
+                            <div class="text-[11px] text-gray-400">
+                                <div id="goal-progress-text" class="font-bold text-gold-300">۰٪ تا هدف ۵ گرمی</div>
+                                <div>هدف بعدی: تحویل شمش ۵ گرمی</div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 w-full md:w-auto text-xs space-y-2">
+                    <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 w-full md:w-auto text-xs space-y-2 relative z-10">
                         <div class="flex justify-between gap-6"><span class="text-gray-300">عیار طلا:</span><span class="font-bold text-gold-300">۷۵۰ (۱۸ عیار استاندارد)</span></div>
                         <div class="flex justify-between gap-6"><span class="text-gray-300">حداقل خرید:</span><span class="font-bold text-gold-300">۱ صوت (۰.۰۰۱ گرم)</span></div>
                         <div class="flex justify-between gap-6"><span class="text-gray-300">کارمزد خرید:</span><span class="font-bold text-emerald-400">صفر درصد</span></div>
@@ -652,12 +765,11 @@
                         <p class="text-xs text-gray-500 mt-1">مقدار وزن یا مبلغ مورد نظر خود را وارد کنید.</p>
                     </div>
 
-                    <!-- Input Modes Switch -->
                     <div class="space-y-4">
                         <div>
                             <label class="block text-xs font-bold text-gray-700 mb-2">وزن طلا (گرم):</label>
                             <div class="relative">
-                                <input id="buy-weight-input" type="number" step="0.001" min="0.001" max="10000" placeholder="مثلا ۰.۵ گرم" oninput="calculatePiggyBuy()" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 font-bold">
+                                <input id="buy-weight-input" type="number" step="0.001" min="0.001" max="10000" placeholder="مثلا ۰.۵ گرم" oninput="calculatePiggyBuy()" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 font-bold focus-gold">
                                 <span class="absolute left-4 top-3 text-xs text-gray-400 font-bold">گرم</span>
                             </div>
                         </div>
@@ -665,13 +777,19 @@
                         <div>
                             <label class="block text-xs font-bold text-gray-700 mb-2">یا مبلغ به تومان:</label>
                             <div class="relative">
-                                <input id="buy-toman-input" type="number" placeholder="مثلا ۲,۰۰۰,۰۰۰ تومان" oninput="calculatePiggyBuyFromToman()" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 font-bold">
+                                <input id="buy-toman-input" type="number" placeholder="مثلا ۲,۰۰۰,۰۰۰ تومان" oninput="calculatePiggyBuyFromToman()" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gold-500 font-bold focus-gold">
                                 <span class="absolute left-4 top-3 text-xs text-gray-400 font-bold">تومان</span>
                             </div>
                         </div>
+
+                        <!-- Quick preset chips -->
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="quickPreset(500000)" class="text-[11px] font-bold bg-gold-50 hover:bg-gold-100 text-gold-700 border border-gold-200 px-3 py-1.5 rounded-full transition">۵۰۰ هزار تومان</button>
+                            <button onclick="quickPreset(1000000)" class="text-[11px] font-bold bg-gold-50 hover:bg-gold-100 text-gold-700 border border-gold-200 px-3 py-1.5 rounded-full transition">۱ میلیون تومان</button>
+                            <button onclick="quickPreset(5000000)" class="text-[11px] font-bold bg-gold-50 hover:bg-gold-100 text-gold-700 border border-gold-200 px-3 py-1.5 rounded-full transition">۵ میلیون تومان</button>
+                        </div>
                     </div>
 
-                    <!-- Calculation Summary Box -->
                     <div class="bg-gold-50/70 rounded-2xl p-4 border border-gold-200 space-y-2 text-sm">
                         <div class="flex justify-between text-gray-600">
                             <span>قیمت هر گرم طلا:</span>
@@ -683,7 +801,7 @@
                         </div>
                     </div>
 
-                    <button onclick="submitPiggyBankPurchase()" class="w-full gold-gradient text-gray-900 font-black py-4 rounded-xl shadow-lg hover:opacity-95 transition text-base">
+                    <button onclick="submitPiggyBankPurchase()" class="btn-shimmer w-full gold-gradient text-onyx font-black py-4 rounded-xl shadow-lg hover:opacity-95 transition text-base focus-gold">
                         ثبت خرید و دریافت شماره کارت واریز
                     </button>
                 </div>
@@ -701,11 +819,11 @@
                         </li>
                         <li class="flex items-start gap-2">
                             <span class="w-5 h-5 rounded-full bg-gold-200 text-gold-800 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">۲</span>
-                            مبلغ را به شماره کارت رسمی طلای معتمدی واریز کنید.
+                            مبلغ را به شماره کارت رسمی قصر جواهر واریز کنید.
                         </li>
                         <li class="flex items-start gap-2">
                             <span class="w-5 h-5 rounded-full bg-gold-200 text-gold-800 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">۳</span>
-                            عکس رسید کارت به کارت را بارگذاری کنید تا ادمین تایید کند.
+                            عکس رسید کارت‌به‌کارت را بارگذاری کنید تا ادمین تایید کند.
                         </li>
                         <li class="flex items-start gap-2">
                             <span class="w-5 h-5 rounded-full bg-gold-200 text-gold-800 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">۴</span>
@@ -714,7 +832,7 @@
                     </ul>
 
                     <div class="bg-white p-4 rounded-xl border border-gray-200 space-y-2 mt-4">
-                        <span class="text-[11px] text-gray-400 font-bold block">شماره کارت جهت واریزی (معتمدی):</span>
+                        <span class="text-[11px] text-gray-400 font-bold block">شماره کارت جهت واریزی (قصر جواهر):</span>
                         <div class="flex justify-between items-center bg-gray-50 p-2.5 rounded-lg border border-gray-200">
                             <span id="display-admin-card" class="font-mono font-bold text-sm text-gray-800 tracking-wider">6037-9918-1234-5678</span>
                             <button onclick="copyToClipboard('6037-9918-1234-5678')" class="text-xs bg-gold-500 text-white px-2.5 py-1 rounded font-bold hover:bg-gold-600 transition">کپی</button>
@@ -726,20 +844,25 @@
 
         <!-- ==================== PAGE 4: INVITE FRIENDS ==================== -->
         <section id="page-invite" class="tab-content hidden space-y-8">
-            <div class="bg-white p-6 sm:p-10 rounded-3xl border border-gold-200/80 shadow-sm text-center max-w-2xl mx-auto space-y-6">
-                <div class="w-20 h-20 bg-gold-50 rounded-full flex items-center justify-center mx-auto text-gold-600 text-3xl shadow-inner">
+            <div class="ornate-frame relative bg-white p-6 sm:p-10 rounded-3xl border border-gold-200/80 shadow-sm text-center max-w-2xl mx-auto space-y-6">
+                <span class="corner-motif cf-tl"><svg viewBox="0 0 40 40" fill="none"><path d="M2 2h14M2 2v14M2 2c10 0 16 6 16 16" stroke="#C9A227" stroke-width="2"/></svg></span>
+                <span class="corner-motif cf-tr"><svg viewBox="0 0 40 40" fill="none"><path d="M2 2h14M2 2v14M2 2c10 0 16 6 16 16" stroke="#C9A227" stroke-width="2"/></svg></span>
+                <span class="corner-motif cf-bl"><svg viewBox="0 0 40 40" fill="none"><path d="M2 2h14M2 2v14M2 2c10 0 16 6 16 16" stroke="#C9A227" stroke-width="2"/></svg></span>
+                <span class="corner-motif cf-br"><svg viewBox="0 0 40 40" fill="none"><path d="M2 2h14M2 2v14M2 2c10 0 16 6 16 16" stroke="#C9A227" stroke-width="2"/></svg></span>
+
+                <div class="w-20 h-20 gold-gradient rounded-full flex items-center justify-center mx-auto text-onyx text-3xl shadow-goldsm">
                     <i class="fa-solid fa-gift"></i>
                 </div>
                 <h2 class="text-2xl font-black text-gray-900">دعوت از دوستان و دریافت پاداش طلایی</h2>
                 <p class="text-sm text-gray-600 leading-relaxed">
-                    با ارسال لینک اختصاصی خود به دوستان‌تان، با هر اولین خرید آن‌ها از قلک طلا، مقدار **۱۰ میلی‌گرم طلا** به صورت رایگان به کیف پول شما و دوست‌تان اضافه خواهد شد!
+                    با ارسال لینک اختصاصی خود به دوستان‌تان، با هر اولین خرید آن‌ها از قلک طلا، مقدار <strong>۱۰ میلی‌گرم طلا</strong> به‌صورت رایگان به کیف پول شما و دوست‌تان اضافه خواهد شد!
                 </p>
 
                 <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200 space-y-3">
                     <span class="text-xs font-bold text-gray-500 block">لینک دعوت اختصاصی شما:</span>
                     <div class="flex items-center gap-2">
-                        <input id="invite-link-input" type="text" readonly value="https://melligold-motamedi.com/ref?id=98106" class="w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono text-gray-700 text-center">
-                        <button onclick="copyInviteLink()" class="gold-gradient text-gray-900 px-4 py-2 rounded-xl text-xs font-bold shrink-0">کپی لینک</button>
+                        <input id="invite-link-input" type="text" readonly value="https://ghasrjavaher.com/ref?id=98106" class="w-full bg-white border border-gray-300 rounded-xl px-3 py-2 text-xs font-mono text-gray-700 text-center">
+                        <button onclick="copyInviteLink()" class="btn-shimmer gold-gradient text-onyx px-4 py-2 rounded-xl text-xs font-bold shrink-0">کپی لینک</button>
                     </div>
                 </div>
             </div>
@@ -749,22 +872,17 @@
         <section id="page-cart" class="tab-content hidden space-y-8">
             <h2 class="text-2xl font-black text-gray-900">سبد خرید شما</h2>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Cart Items List -->
-                <div id="cart-items-container" class="lg:col-span-2 space-y-4">
-                    <!-- Dynamic Cart Items via JS -->
-                </div>
+                <div id="cart-items-container" class="lg:col-span-2 space-y-4"></div>
 
-                <!-- Checkout Summary Card -->
                 <div class="bg-white p-6 rounded-3xl border border-gold-200/80 shadow-sm h-fit space-y-6">
                     <h3 class="font-bold text-gray-900 border-b border-gray-100 pb-3">خلاصه سفارش</h3>
-                    
                     <div class="space-y-3 text-sm">
                         <div class="flex justify-between text-gray-600"><span>مجموع وزن طلا:</span><span id="cart-total-weight" class="font-bold text-gray-900">۰ گرم</span></div>
                         <div class="flex justify-between text-gray-600"><span>مجموع مبلغ (بر اساس نرخ لحظه‌ای):</span><span id="cart-total-price" class="font-bold text-gray-900">۰ تومان</span></div>
                     </div>
 
                     <div id="checkout-action-area" class="space-y-3 pt-4 border-t border-gray-100">
-                        <button onclick="requestInquiryFromAdmin()" class="w-full bg-gray-900 text-white font-bold py-3.5 rounded-xl hover:bg-black transition text-sm flex items-center justify-center gap-2">
+                        <button onclick="requestInquiryFromAdmin()" class="btn-shimmer w-full bg-onyx text-white font-bold py-3.5 rounded-xl hover:bg-black transition text-sm flex items-center justify-center gap-2 focus-gold">
                             <i class="fa-solid fa-paper-plane text-gold-400"></i>
                             استعلام قیمت و موجودی از ادمین
                         </button>
@@ -774,90 +892,76 @@
             </div>
         </section>
 
-        <!-- ==================== PAGE 6: GOLD SHOP (VITRINE) ==================== -->
+        <!-- ==================== PAGE 6: GOLD SHOP ==================== -->
         <section id="page-shop" class="tab-content hidden space-y-8">
             <div>
                 <h2 class="text-2xl font-black text-gray-900">ویترین مصنوعات و سرویس طلا</h2>
                 <p class="text-xs text-gray-500 mt-1">امکان خرید مستقیم یا معاوضه با کیف پول طلای آب‌شده</p>
             </div>
 
-            <!-- Categories Bar (Digikala style) -->
             <div class="flex items-center gap-3 overflow-x-auto pb-2 hide-scrollbar">
-                <button onclick="filterShopCategory('all')" class="category-btn active px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap bg-gold-500 text-white shadow-md">همه محصولات</button>
-                <button onclick="filterShopCategory('service')" class="category-btn px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gold-50">سرویس طلا</button>
-                <button onclick="filterShopCategory('ring')" class="category-btn px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gold-50">انگشتر</button>
-                <button onclick="filterShopCategory('necklace')" class="category-btn px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gold-50">گردنبند</button>
-                <button onclick="filterShopCategory('bracelet')" class="category-btn px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gold-50">دستبند</button>
+                <button onclick="filterShopCategory('all')" class="category-btn active px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap gold-gradient text-onyx shadow-md transition">همه محصولات</button>
+                <button onclick="filterShopCategory('service')" class="category-btn px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gold-50 transition">سرویس طلا</button>
+                <button onclick="filterShopCategory('ring')" class="category-btn px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gold-50 transition">انگشتر</button>
+                <button onclick="filterShopCategory('necklace')" class="category-btn px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gold-50 transition">گردنبند</button>
+                <button onclick="filterShopCategory('bracelet')" class="category-btn px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap bg-white text-gray-700 border border-gray-200 hover:bg-gold-50 transition">دستبند</button>
             </div>
 
-            <!-- Products Grid -->
-            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- Products dynamically rendered by JS -->
-            </div>
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
         </section>
 
         <!-- ==================== PAGE 7: ABOUT US ==================== -->
         <section id="page-about" class="tab-content hidden space-y-8">
             <div class="bg-white p-8 sm:p-12 rounded-3xl border border-gold-200/80 shadow-sm max-w-4xl mx-auto space-y-6">
-                <h2 class="text-3xl font-black text-gray-900 border-b border-gray-100 pb-4">درباره قصر جواهر </h2>
+                <h2 class="text-3xl font-black text-gray-900 border-b border-gray-100 pb-4">درباره قصر جواهر</h2>
                 <p class="text-gray-600 text-sm leading-relaxed">
-                    گالری و پلتفرم آنلاین «طلای معتمدی» با هدف تسهیل در امر سرمایه‌گذاری طلا برای تمامی اقشار جامعه ایجاد شده است. ما این امکان را فراهم کرده‌ایم تا هر شخص با هر میزان بودجه، بتواند طلای ۱۸ عیار آب‌شده خریداری کرده و دارایی خود را از تورم حفظ کند.
+                    گالری و پلتفرم آنلاین «قصر جواهر» با هدف تسهیل در امر سرمایه‌گذاری طلا برای تمامی اقشار جامعه ایجاد شده است. ما این امکان را فراهم کرده‌ایم تا هر شخص با هر میزان بودجه، بتواند طلای ۱۸ عیار آب‌شده خریداری کرده و دارایی خود را از تورم حفظ کند.
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 text-xs font-bold">
-                    <div class="bg-gold-50/60 p-4 rounded-xl border border-gold-200">📍 آدرس:رودان هرمزگان </div>
-                    <div class="bg-gold-50/60 p-4 rounded-xl border border-gold-200"> شماره تماس:09981064505 </div>
+                    <div class="bg-gold-50/60 p-4 rounded-xl border border-gold-200">📍 آدرس: رودان، هرمزگان</div>
+                    <div class="bg-gold-50/60 p-4 rounded-xl border border-gold-200">☎️ شماره تماس: ۰۹۹۸۱۰۶۴۵۰۵</div>
                 </div>
             </div>
         </section>
 
         <!-- ==================== PAGE 8: ADMIN PANEL ==================== -->
         <section id="page-admin" class="tab-content hidden space-y-8">
-            <div class="bg-red-500 text-white p-6 rounded-3xl shadow-lg flex justify-between items-center">
+            <div class="bg-gradient-to-l from-ruby to-ruby-light text-white p-6 rounded-3xl shadow-lg flex justify-between items-center" style="background:linear-gradient(120deg,#6B1220,#9A1F33);">
                 <div>
-                    <h2 class="text-2xl font-black">پنل مدیریت قصر جواهر </h2>
-                    <p class="text-xs text-red-100 mt-1">ورود مجاز با شماره: 09981064505</p>
+                    <h2 class="text-2xl font-black">پنل مدیریت قصر جواهر</h2>
+                    <p class="text-xs text-red-100 mt-1">ورود مجاز با شماره: ۰۹۹۸۱۰۶۴۵۰۵</p>
                 </div>
                 <span class="bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold">مدیر ارشد</span>
             </div>
 
-            <!-- Admin Tabs Navigation -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Pending Inquiries Section -->
-                <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+                <div class="lux-card bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
                     <h3 class="font-bold text-gray-900 border-b border-gray-100 pb-3 flex items-center gap-2">
                         <i class="fa-solid fa-bell text-gold-500"></i>
                         استعلام‌های منتظر تایید موجودی و قیمت
                     </h3>
-                    <div id="admin-inquiries-list" class="space-y-3 text-xs">
-                        <!-- Dynamic via JS -->
-                    </div>
+                    <div id="admin-inquiries-list" class="space-y-3 text-xs"></div>
                 </div>
 
-                <!-- Pending Piggy Bank Receipts -->
-                <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+                <div class="lux-card bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
                     <h3 class="font-bold text-gray-900 border-b border-gray-100 pb-3 flex items-center gap-2">
                         <i class="fa-solid fa-receipt text-emerald-500"></i>
                         رسیدهای واریز قلک طلا
                     </h3>
-                    <div id="admin-receipts-list" class="space-y-3 text-xs">
-                        <!-- Dynamic via JS -->
-                    </div>
+                    <div id="admin-receipts-list" class="space-y-3 text-xs"></div>
                 </div>
 
-                <!-- Products & Bank Card Controls -->
-                <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-6">
+                <div class="lux-card bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-6">
                     <h3 class="font-bold text-gray-900 border-b border-gray-100 pb-3">تنظیمات ادمین و افزودن محصول</h3>
-                    
-                    <!-- Change Admin Card -->
+
                     <div class="space-y-2">
                         <label class="block text-xs font-bold text-gray-700">تغییر شماره کارت جهت واریزی:</label>
                         <div class="flex gap-2">
                             <input id="admin-card-input" type="text" value="6037-9918-1234-5678" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-mono font-bold">
-                            <button onclick="updateAdminCardNumber()" class="bg-gray-900 text-white px-3 py-2 rounded-xl text-xs font-bold">ثبت</button>
+                            <button onclick="updateAdminCardNumber()" class="bg-onyx text-white px-3 py-2 rounded-xl text-xs font-bold">ثبت</button>
                         </div>
                     </div>
 
-                    <!-- Add New Product Form -->
                     <div class="space-y-3 pt-4 border-t border-gray-100">
                         <h4 class="font-bold text-xs text-gray-800">افزودن محصول جدید به ویترین:</h4>
                         <input id="new-prod-title" type="text" placeholder="نام محصول" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-xs">
@@ -873,7 +977,7 @@
                             <option value="bracelet">دستبند</option>
                         </select>
                         <input id="new-prod-img" type="text" placeholder="لینک عکس محصول" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-xs">
-                        <button onclick="addNewProductFromAdmin()" class="w-full gold-gradient text-gray-900 font-bold py-2.5 rounded-xl text-xs">افزودن محصول</button>
+                        <button onclick="addNewProductFromAdmin()" class="btn-shimmer w-full gold-gradient text-onyx font-bold py-2.5 rounded-xl text-xs">افزودن محصول</button>
                     </div>
                 </div>
             </div>
@@ -881,19 +985,19 @@
 
     </main>
 
-    <!-- FOOTER SECTION (Expanded) -->
-    <footer class="bg-gray-950 text-white pt-16 pb-12 border-t border-gold-600/30">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <!-- FOOTER -->
+    <footer class="bg-onyx text-white pt-16 pb-12 border-t border-gold-600/25 relative overflow-hidden noise-overlay">
+        <div class="absolute -bottom-24 left-1/3 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Col 1: Brand Info -->
                 <div class="space-y-4">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-xl gold-gradient p-[2px] flex items-center justify-center">
-                            <div class="w-full h-full bg-gray-950 rounded-[10px] flex items-center justify-center">
-                                <i class="fa-solid fa-gem text-gold-500 text-lg"></i>
+                            <div class="w-full h-full bg-onyx rounded-[10px] flex items-center justify-center">
+                                <i class="fa-solid fa-gem text-gold-400 text-lg"></i>
                             </div>
                         </div>
-                        <h3 class="text-lg font-black"> قصر جواهر </h3>
+                        <h3 class="text-lg font-black">قصر جواهر</h3>
                     </div>
                     <p class="text-xs text-gray-400 leading-relaxed">
                         پلتفرم تخصصی و امن خرید آنلاین طلای آب‌شده و مصنوعات با قیمت زنده و فاکتور رسمی.
@@ -905,7 +1009,6 @@
                     </div>
                 </div>
 
-                <!-- Col 2: Quick Links -->
                 <div class="space-y-3">
                     <h4 class="font-bold text-sm text-gold-300">دسترسی سریع</h4>
                     <ul class="text-xs text-gray-400 space-y-2">
@@ -916,64 +1019,75 @@
                     </ul>
                 </div>
 
-                <!-- Col 3: Contact Info -->
                 <div class="space-y-3">
                     <h4 class="font-bold text-sm text-gold-300">ارتباط با گالری</h4>
                     <ul class="text-xs text-gray-400 space-y-2.5">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-gold-500"></i> ۰۲۱-۱۲۳۴۵۶۷۸</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-location-dot text-gold-500 mt-0.5"></i>  رودان هرمزگان li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-gold-500"></i> ۰۹۹۸۱۰۶۴۵۰۵</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-location-dot text-gold-500 mt-0.5"></i> رودان، هرمزگان</li>
                         <li class="flex items-center gap-2"><i class="fa-solid fa-clock text-gold-500"></i> شنبه تا چهارشنبه: ۱۰ الی ۱۹</li>
                     </ul>
                 </div>
 
-                <!-- Col 4: Newsletter -->
                 <div class="space-y-3">
                     <h4 class="font-bold text-sm text-gold-300">عضویت در خبرنامه تحلیلی</h4>
                     <p class="text-[11px] text-gray-400">آخرین تحلیل‌های بازار طلا را در ایمیل خود دریافت کنید.</p>
                     <div class="space-y-2">
                         <input type="email" placeholder="ایمیل خود را وارد کنید..." class="w-full bg-white/10 border border-white/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-gold-500">
-                        <button class="w-full gold-gradient text-gray-950 font-bold py-2 rounded-xl text-xs">عضویت</button>
+                        <button onclick="showToast('با موفقیت در خبرنامه عضو شدید 🎉','success')" class="btn-shimmer w-full gold-gradient text-onyx font-bold py-2 rounded-xl text-xs">عضویت</button>
                     </div>
                 </div>
             </div>
 
             <div class="border-t border-white/10 pt-6 text-center text-xs text-gray-500">
-                تمام حقوق مادی و معنوی متعلق به **قصر چواهر ** می‌افتد.
+                تمام حقوق مادی و معنوی متعلق به <strong class="text-gold-400">قصر جواهر</strong> می‌باشد.
             </div>
         </div>
     </footer>
 
-    <!-- MOBILE BOTTOM NAVIGATION (iOS Style) -->
-    <nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-200 py-2 px-3 z-50 shadow-lg flex justify-around items-center">
-        <button onclick="switchTab('home')" class="nav-mobile-btn flex flex-col items-center gap-1 text-gold-600" data-tab="home">
+    <!-- MOBILE BOTTOM NAVIGATION -->
+    <nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-onyx/95 backdrop-blur-lg border-t border-white/10 py-2 px-3 z-50 shadow-lg flex justify-around items-center">
+        <button onclick="switchTab('home')" class="nav-mobile-btn flex flex-col items-center gap-1 text-gold-300 relative px-2 py-1" data-tab="home">
+            <span class="nav-mobile-pill"></span>
             <i class="fa-solid fa-house text-lg"></i>
             <span class="text-[10px] font-bold">خانه</span>
         </button>
-        <button onclick="switchTab('live-price')" class="nav-mobile-btn flex flex-col items-center gap-1 text-gray-400" data-tab="live-price">
+        <button onclick="switchTab('live-price')" class="nav-mobile-btn flex flex-col items-center gap-1 text-gray-400 relative px-2 py-1" data-tab="live-price">
+            <span class="nav-mobile-pill"></span>
             <i class="fa-solid fa-chart-line text-lg"></i>
             <span class="text-[10px] font-bold">نمودار</span>
         </button>
-        <button onclick="switchTab('piggy-bank')" class="nav-mobile-btn flex flex-col items-center gap-1 text-gray-400" data-tab="piggy-bank">
+        <button onclick="switchTab('piggy-bank')" class="nav-mobile-btn flex flex-col items-center gap-1 text-gray-400 relative px-2 py-1" data-tab="piggy-bank">
+            <span class="nav-mobile-pill"></span>
             <i class="fa-solid fa-piggy-bank text-lg"></i>
             <span class="text-[10px] font-bold">قلک</span>
         </button>
-        <button onclick="switchTab('shop')" class="nav-mobile-btn flex flex-col items-center gap-1 text-gray-400" data-tab="shop">
+        <button onclick="switchTab('shop')" class="nav-mobile-btn flex flex-col items-center gap-1 text-gray-400 relative px-2 py-1" data-tab="shop">
+            <span class="nav-mobile-pill"></span>
             <i class="fa-solid fa-store text-lg"></i>
             <span class="text-[10px] font-bold">ویترین</span>
         </button>
-        <button onclick="switchTab('cart')" class="nav-mobile-btn flex flex-col items-center gap-1 text-gray-400 relative" data-tab="cart">
+        <button onclick="switchTab('cart')" class="nav-mobile-btn flex flex-col items-center gap-1 text-gray-400 relative px-2 py-1" data-tab="cart">
+            <span class="nav-mobile-pill"></span>
             <i class="fa-solid fa-bag-shopping text-lg"></i>
             <span class="text-[10px] font-bold">سبد خرید</span>
         </button>
     </nav>
 
+    <!-- Scroll to top -->
+    <button id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="hidden fixed left-5 bottom-24 lg:bottom-8 z-40 w-11 h-11 rounded-full gold-gradient text-onyx shadow-gold items-center justify-center focus-gold">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Toast stack -->
+    <div id="toast-stack"></div>
+
     <!-- LOGIN MODAL -->
-    <div id="login-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full space-y-6 shadow-2xl border border-gold-200 relative">
+    <div id="login-modal" class="modal-backdrop fixed inset-0 bg-black/70 backdrop-blur-sm z-[70] hidden flex items-center justify-center p-4">
+        <div class="modal-panel bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full space-y-6 shadow-2xl border border-gold-200 relative">
             <button onclick="closeLoginModal()" class="absolute top-4 left-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
-            
+
             <div class="text-center space-y-2">
-                <div class="w-12 h-12 gold-gradient rounded-2xl flex items-center justify-center mx-auto text-gray-900 font-bold text-xl"><i class="fa-solid fa-user"></i></div>
+                <div class="w-12 h-12 gold-gradient rounded-2xl flex items-center justify-center mx-auto text-onyx font-bold text-xl"><i class="fa-solid fa-user"></i></div>
                 <h3 class="text-xl font-black text-gray-900">ورود / ثبت‌نام</h3>
                 <p class="text-xs text-gray-500">جهت دسترسی به حساب کاربری شماره موبایل خود را وارد کنید.</p>
             </div>
@@ -981,18 +1095,18 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-gray-700 mb-2">شماره همراه:</label>
-                    <input id="user-phone-input" type="tel" placeholder="۰۹۱۲۳۴۵۶۷۸۹" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-bold text-center tracking-wider focus:outline-none focus:border-gold-500">
+                    <input id="user-phone-input" type="tel" placeholder="۰۹۱۲۳۴۵۶۷۸۹" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm font-bold text-center tracking-wider focus:outline-none focus:border-gold-500 focus-gold">
                 </div>
-                <button onclick="processLogin()" class="w-full gold-gradient text-gray-900 font-black py-3.5 rounded-xl shadow-md text-sm">تایید و ورود</button>
+                <button onclick="processLogin()" class="btn-shimmer w-full gold-gradient text-onyx font-black py-3.5 rounded-xl shadow-md text-sm">تایید و ورود</button>
             </div>
         </div>
     </div>
 
     <!-- PIGGY RECEIPT MODAL -->
-    <div id="receipt-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full space-y-6 shadow-2xl border border-gold-200 relative">
+    <div id="receipt-modal" class="modal-backdrop fixed inset-0 bg-black/70 backdrop-blur-sm z-[70] hidden flex items-center justify-center p-4">
+        <div class="modal-panel bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full space-y-6 shadow-2xl border border-gold-200 relative">
             <button onclick="closeReceiptModal()" class="absolute top-4 left-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
-            
+
             <h3 class="text-lg font-black text-gray-900 border-b border-gray-100 pb-3">آپلود رسید واریز وجه</h3>
 
             <div class="space-y-4 text-xs">
@@ -1011,22 +1125,22 @@
                     <input id="receipt-file-input" type="file" accept="image/*" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-gold-50 file:text-gold-700 hover:file:bg-gold-100">
                 </div>
 
-                <button onclick="confirmSubmitReceipt()" class="w-full gold-gradient text-gray-900 font-bold py-3 rounded-xl shadow-md text-sm">ارسال برای تایید ادمین</button>
+                <button onclick="confirmSubmitReceipt()" class="btn-shimmer w-full gold-gradient text-onyx font-bold py-3 rounded-xl shadow-md text-sm">ارسال برای تایید ادمین</button>
             </div>
         </div>
     </div>
 
-    <!-- FINAL CHECKOUT MODAL (Shipping & Gold Wallet Payment) -->
-    <div id="checkout-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-6 shadow-2xl border border-gold-200 relative max-h-[90vh] overflow-y-auto">
+    <!-- FINAL CHECKOUT MODAL -->
+    <div id="checkout-modal" class="modal-backdrop fixed inset-0 bg-black/70 backdrop-blur-sm z-[70] hidden flex items-center justify-center p-4">
+        <div class="modal-panel bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-6 shadow-2xl border border-gold-200 relative max-h-[90vh] overflow-y-auto">
             <button onclick="closeCheckoutModal()" class="absolute top-4 left-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
-            
+
             <h3 class="text-xl font-black text-gray-900 border-b border-gray-100 pb-3">تکمیل خرید و ارسال سفارش</h3>
 
             <div class="space-y-4 text-xs">
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">نام و نام خانوادگی تحویل گیرنده:</label>
-                    <input id="checkout-name" type="text" placeholder="مثلا: امیرحسین " class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 font-bold">
+                    <input id="checkout-name" type="text" placeholder="مثلا: امیرحسین" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 font-bold">
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
@@ -1043,11 +1157,10 @@
                     <textarea id="checkout-address" rows="2" placeholder="استان، شهر، خیابان اصلی..." class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 font-bold"></textarea>
                 </div>
 
-                <!-- Payment Method Selection -->
                 <div class="space-y-2 pt-2">
                     <label class="block font-bold text-gray-700">روش پرداخت:</label>
-                    
-                    <label class="flex items-center justify-between p-3 border rounded-xl bg-gold-50/50 border-gold-300 cursor-pointer">
+
+                    <label class="flex items-center justify-between p-3 border rounded-xl bg-gold-50/50 border-gold-300 cursor-pointer transition hover:border-gold-500">
                         <div class="flex items-center gap-2">
                             <input type="radio" name="pay-method" value="wallet" checked class="text-gold-600 focus:ring-gold-500">
                             <span class="font-bold text-gray-900">پرداخت با کیف پول طلا (طلای آب‌شده)</span>
@@ -1055,7 +1168,7 @@
                         <i class="fa-solid fa-vault text-gold-600"></i>
                     </label>
 
-                    <label class="flex items-center justify-between p-3 border rounded-xl border-gray-200 cursor-pointer">
+                    <label class="flex items-center justify-between p-3 border rounded-xl border-gray-200 cursor-pointer transition hover:border-gold-500">
                         <div class="flex items-center gap-2">
                             <input type="radio" name="pay-method" value="card" class="text-gold-600 focus:ring-gold-500">
                             <span class="font-bold text-gray-900">واریز به شماره کارت</span>
@@ -1064,78 +1177,173 @@
                     </label>
                 </div>
 
-                <button onclick="finalizePurchaseOrder()" class="w-full gold-gradient text-gray-900 font-black py-3.5 rounded-xl shadow-lg text-sm">ثبت و نهایی‌سازی سفارش</button>
+                <button onclick="finalizePurchaseOrder()" class="btn-shimmer w-full gold-gradient text-onyx font-black py-3.5 rounded-xl shadow-lg text-sm">ثبت و نهایی‌سازی سفارش</button>
             </div>
         </div>
     </div>
 
-
     <!-- JAVASCRIPT APP LOGIC -->
     <script>
-        // GLOBAL APP STATE
+        // ================= GLOBAL APP STATE =================
         const AppState = {
-            liveGoldPrice: 4850000, // Tomans per 1 gram of 18k
+            liveGoldPrice: 4850000,
             adminPhone: "09981064505",
             adminCardNumber: "6037-9918-1234-5678",
             currentUser: null,
             cart: [],
             pendingInquiries: [],
             pendingReceipts: [],
+            goalGrams: 5,
             products: [
-                { id: 1, code: "MOT-101", title: "سرویس طلای طرح البرناردو", category: "service", weight: 14.500, fee: 7, img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" },
-                { id: 2, code: "MOT-102", title: "دستبند طلای کارتیر ۵ ردیفه", category: "bracelet", weight: 8.200, fee: 5, img: "https://images.unsplash.com/photo-1611591475155-4282fc289e78?auto=format&fit=crop&w=600&q=80" },
-                { id: 3, code: "MOT-103", title: "انگشتر سولیتیر طلا و نگین اتمی", category: "ring", weight: 3.150, fee: 6, img: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80" },
-                { id: 4, code: "MOT-104", title: "گردنبند طلا طرح ون‌کلیف", category: "necklace", weight: 5.800, fee: 8, img: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=600&q=80" }
+                { id: 1, code: "GJ-101", title: "سرویس طلای طرح ون‌کلیف پرنسس", category: "service", weight: 14.500, fee: 7, img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80", tag: "پرفروش" },
+                { id: 2, code: "GJ-102", title: "دستبند طلای کارتیر ۵ ردیفه", category: "bracelet", weight: 8.200, fee: 5, img: "https://images.unsplash.com/photo-1611591475155-4282fc289e78?auto=format&fit=crop&w=600&q=80", tag: "جدید" },
+                { id: 3, code: "GJ-103", title: "انگشتر سولیتر طلا و نگین آتشین", category: "ring", weight: 3.150, fee: 6, img: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80", tag: "" },
+                { id: 4, code: "GJ-104", title: "گردنبند طلا طرح ملکه", category: "necklace", weight: 5.800, fee: 8, img: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=600&q=80", tag: "پیشنهاد ویژه" }
+            ],
+            testimonials: [
+                { name: "مهدی رضایی", role: "سرمایه‌گذار از تهران", initials: "م‌ر", text: "بهترین ویژگی قلک طلا اینه که هر ماه خرد خرد مثلاً با ۱ میلیون تومن طلا می‌خرم و نیازی نیست حتماً پول یک سکه کامل رو داشته باشم." },
+                { name: "سارا احمدی", role: "خریدار مصنوعات", initials: "س‌ام", text: "من طلای آب‌شده رو در قلک جمع کردم و بعدش با سرویس طلای ون‌کلیف تعویض کردم. ارسالشون فوق‌العاده سریع و عالی بود." },
+                { name: "علیرضا کریمی", role: "معامله‌گر طلا", initials: "ع‌ک", text: "پشتیبانی ادمین و تایید سریع رسیدها واقعاً بی‌نظیره. قیمت‌ها دقیقاً با نرخ بازار تهران به‌روز می‌شه." }
             ],
             tempPiggyBuy: null
         };
 
-        // INITIALIZATION
+        // ================= INITIALIZATION =================
         document.addEventListener('DOMContentLoaded', () => {
             initChart();
             renderProducts();
             renderHomeFeaturedProducts();
+            renderTestimonials();
             updateLiveTickers();
             updateHomeSavingsCalculator();
+            initScrollReveal();
+            initHeroParticles();
+            initCounters();
+            updateGoalRing();
 
-            // Simulating Live Price Changes every 10 seconds
+            window.addEventListener('scroll', () => {
+                const btn = document.getElementById('scroll-top-btn');
+                if (window.scrollY > 500) { btn.classList.remove('hidden'); btn.classList.add('flex'); }
+                else { btn.classList.add('hidden'); btn.classList.remove('flex'); }
+            });
+
             setInterval(() => {
+                const prevPrice = AppState.liveGoldPrice;
                 const delta = (Math.random() - 0.48) * 15000;
                 AppState.liveGoldPrice = Math.round(AppState.liveGoldPrice + delta);
-                updateLiveTickers();
+                updateLiveTickers(prevPrice);
                 updateUserWalletDisplay();
             }, 10000);
         });
 
-        // TAB NAVIGATION SYSTEM
+        // ================= TOASTS (replaces alert) =================
+        function showToast(message, type = 'info') {
+            const stack = document.getElementById('toast-stack');
+            const icons = { success: 'fa-circle-check text-emerald-400', info: 'fa-circle-info text-gold-300', error: 'fa-triangle-exclamation text-red-400' };
+            const el = document.createElement('div');
+            el.className = 'toast';
+            el.innerHTML = `<i class="fa-solid ${icons[type] || icons.info}"></i><span>${message}</span>`;
+            stack.appendChild(el);
+            setTimeout(() => el.remove(), 3000);
+        }
+
+        // ================= SCROLL REVEAL =================
+        function initScrollReveal() {
+            const items = document.querySelectorAll('.reveal');
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); } });
+            }, { threshold: 0.12 });
+            items.forEach(el => io.observe(el));
+        }
+
+        // ================= COUNTERS =================
+        function initCounters() {
+            const counters = document.querySelectorAll('.counter');
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter(entry.target);
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            counters.forEach(c => io.observe(c));
+        }
+        function animateCounter(el) {
+            const target = parseInt(el.dataset.target, 10);
+            const suffix = el.dataset.suffix || '';
+            const duration = 1400;
+            const start = performance.now();
+            function tick(now) {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const val = Math.round(target * eased);
+                el.innerText = formatNumber(val) + suffix;
+                if (progress < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        }
+
+        // ================= HERO PARTICLE CANVAS =================
+        function initHeroParticles() {
+            const canvas = document.getElementById('hero-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let w, h, particles;
+
+            function resize() {
+                w = canvas.width = canvas.offsetWidth;
+                h = canvas.height = canvas.offsetHeight;
+            }
+            function makeParticles() {
+                particles = Array.from({ length: 45 }, () => ({
+                    x: Math.random() * w, y: Math.random() * h,
+                    r: Math.random() * 1.8 + 0.4,
+                    vy: Math.random() * 0.25 + 0.05,
+                    vx: (Math.random() - 0.5) * 0.15,
+                    a: Math.random() * 0.6 + 0.2
+                }));
+            }
+            function draw() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => {
+                    p.y -= p.vy; p.x += p.vx;
+                    if (p.y < -5) p.y = h + 5;
+                    if (p.x < -5) p.x = w + 5;
+                    if (p.x > w + 5) p.x = -5;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(243,213,124,${p.a})`;
+                    ctx.fill();
+                });
+                requestAnimationFrame(draw);
+            }
+            resize(); makeParticles(); draw();
+            window.addEventListener('resize', () => { resize(); makeParticles(); });
+        }
+
+        // ================= TAB NAVIGATION =================
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             const target = document.getElementById(`page-${tabId}`);
-            if (target) target.classList.remove('hidden');
+            if (target) { target.classList.remove('hidden'); target.querySelectorAll('.reveal').forEach(el => el.classList.add('in')); }
 
-            // Update Nav Active States
             document.querySelectorAll('.nav-btn').forEach(btn => {
-                if (btn.dataset.tab === tabId) {
-                    btn.classList.add('text-gold-600', 'font-bold');
-                } else {
-                    btn.classList.remove('text-gold-600', 'font-bold');
-                }
+                btn.classList.toggle('active-nav', btn.dataset.tab === tabId);
+                btn.classList.toggle('text-gold-300', btn.dataset.tab === tabId);
             });
 
             document.querySelectorAll('.nav-mobile-btn').forEach(btn => {
-                if (btn.dataset.tab === tabId) {
-                    btn.classList.add('text-gold-600');
-                    btn.classList.remove('text-gray-400');
-                } else {
-                    btn.classList.remove('text-gold-600');
-                    btn.classList.add('text-gray-400');
-                }
+                const isActive = btn.dataset.tab === tabId;
+                btn.classList.toggle('active-mobile', isActive);
+                btn.classList.toggle('text-gold-300', isActive);
+                btn.classList.toggle('text-gray-400', !isActive);
             });
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // HOME CALCULATOR FUNCTION
+        // ================= HOME CALCULATOR =================
         function updateHomeSavingsCalculator() {
             const monthlyVal = parseFloat(document.getElementById('calc-range').value);
             document.getElementById('calc-monthly-label').innerText = `${formatNumber(monthlyVal)} تومان`;
@@ -1151,119 +1359,157 @@
             document.getElementById('calc-res-5y').innerText = `${(yearlyGold * 5).toFixed(1)} گرم`;
         }
 
-        // FAQ TOGGLE
+        // ================= FAQ TOGGLE =================
         function toggleFaq(id) {
-            const ans = document.getElementById(`faq-ans-${id}`);
+            const panel = document.getElementById(`faq-panel-${id}`);
             const icon = document.getElementById(`faq-icon-${id}`);
-            if (ans.classList.contains('hidden')) {
-                ans.classList.remove('hidden');
-                icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
-            } else {
-                ans.classList.add('hidden');
-                icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
-            }
+            panel.classList.toggle('open');
+            icon.classList.toggle('rot');
         }
 
-        // RENDER FEATURED PRODUCTS ON HOME
+        // ================= FEATURED PRODUCTS (HOME) =================
         function renderHomeFeaturedProducts() {
             const container = document.getElementById('home-featured-products');
             if (!container) return;
             container.innerHTML = '';
 
-            AppState.products.slice(0, 4).forEach(p => {
+            AppState.products.slice(0, 4).forEach((p, idx) => {
                 const itemPrice = (p.weight * AppState.liveGoldPrice) * (1 + p.fee / 100);
                 container.innerHTML += `
-                    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition duration-300 overflow-hidden flex flex-col justify-between">
+                    <div class="lux-card reveal bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col justify-between" style="--i:${idx}">
                         <div>
-                            <div class="h-44 overflow-hidden relative">
-                                <img src="${p.img}" class="w-full h-full object-cover">
-                                <span class="absolute top-2 right-2 bg-gray-900/80 text-white text-[10px] px-2 py-0.5 rounded-md font-bold">کد: ${p.code}</span>
+                            <div class="h-44 overflow-hidden relative group">
+                                <img src="${p.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                ${p.tag ? `<span class="absolute top-2 left-2 bg-gold-500 text-onyx text-[10px] px-2 py-0.5 rounded-md font-black shadow">${p.tag}</span>` : ''}
+                                <span class="absolute top-2 right-2 bg-onyx/80 text-white text-[10px] px-2 py-0.5 rounded-md font-bold">کد: ${p.code}</span>
                             </div>
                             <div class="p-4 space-y-2">
                                 <h4 class="font-bold text-gray-900 text-xs">${p.title}</h4>
-                                <div class="text-gold-700 font-black text-xs">
-                                    قیمت: ${formatNumber(itemPrice)} تومان
-                                </div>
+                                <div class="text-gold-700 font-black text-xs">قیمت: ${formatNumber(itemPrice)} تومان</div>
                             </div>
                         </div>
                         <div class="p-4 pt-0">
-                            <button onclick="addToCart(${p.id})" class="w-full bg-gold-50 text-gold-700 hover:bg-gold-500 hover:text-white border border-gold-200 font-bold py-2 rounded-xl transition text-xs">
+                            <button onclick="addToCart(${p.id})" class="btn-shimmer w-full bg-gold-50 text-gold-700 hover:bg-gold-500 hover:text-white border border-gold-200 font-bold py-2 rounded-xl transition text-xs">
                                 افزودن به سبد
                             </button>
                         </div>
                     </div>
                 `;
             });
+            initScrollReveal();
         }
 
-        // CHART INITIALIZATION
+        // ================= TESTIMONIALS CAROUSEL =================
+        let testiIndex = 0;
+        function renderTestimonials() {
+            const slides = document.getElementById('testi-slides');
+            const dots = document.getElementById('testi-dots');
+            slides.innerHTML = AppState.testimonials.map(t => `
+                <div class="w-full shrink-0 px-2">
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl border border-gray-100 shadow-sm space-y-4 text-center">
+                        <div class="flex items-center justify-center gap-3">
+                            <div class="w-11 h-11 rounded-full gold-gradient flex items-center justify-center font-black text-onyx text-xs">${t.initials}</div>
+                            <div class="text-right">
+                                <h5 class="font-bold text-xs text-gray-900">${t.name}</h5>
+                                <span class="text-[10px] text-gray-400">${t.role}</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed">«${t.text}»</p>
+                        <div class="text-amber-400 text-xs">${'<i class="fa-solid fa-star"></i>'.repeat(5)}</div>
+                    </div>
+                </div>
+            `).join('');
+            dots.innerHTML = AppState.testimonials.map((_, i) => `<span class="dot ${i === 0 ? 'active' : ''}" onclick="goToTestimonial(${i})"></span>`).join('');
+            updateTestimonialPosition();
+            setInterval(() => { testiIndex = (testiIndex + 1) % AppState.testimonials.length; updateTestimonialPosition(); }, 5000);
+        }
+        function goToTestimonial(i) { testiIndex = i; updateTestimonialPosition(); }
+        function updateTestimonialPosition() {
+            document.getElementById('testi-slides').style.transform = `translateX(${testiIndex * 100}%)`;
+            document.querySelectorAll('#testi-dots .dot').forEach((d, i) => d.classList.toggle('active', i === testiIndex));
+        }
+
+        // ================= CHART =================
+        let goldChartInstance;
         function initChart() {
             const ctx = document.getElementById('goldChart').getContext('2d');
-            new Chart(ctx, {
+            const gradientFill = ctx.createLinearGradient(0, 0, 0, 320);
+            gradientFill.addColorStop(0, 'rgba(201,162,39,0.35)');
+            gradientFill.addColorStop(1, 'rgba(201,162,39,0)');
+
+            goldChartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: ['۱۰:۰۰', '۱۱:۰۰', '۱۲:۰۰', '۱۳:۰۰', '۱۴:۰۰', '۱۵:۰۰', '۱۶:۰۰'],
                     datasets: [{
                         label: 'قیمت هر گرم طلای ۱۸ عیار (تومان)',
                         data: [4810000, 4825000, 4820000, 4840000, 4835000, 4848000, 4850000],
-                        borderColor: '#D4AF37',
-                        backgroundColor: 'rgba(212, 175, 55, 0.1)',
-                        fill: true,
-                        tension: 0.4,
-                        borderWidth: 3
+                        borderColor: '#C9A227',
+                        backgroundColor: gradientFill,
+                        fill: true, tension: 0.4, borderWidth: 3,
+                        pointBackgroundColor: '#F3D57C', pointBorderColor: '#8A6B12', pointRadius: 4, pointHoverRadius: 7
                     }]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
+                    responsive: true, maintainAspectRatio: false,
+                    animation: { duration: 900, easing: 'easeOutQuart' },
                     plugins: { legend: { display: false } },
-                    scales: {
-                        x: { grid: { display: false } },
-                        y: { grid: { color: 'rgba(0,0,0,0.05)' } }
-                    }
+                    scales: { x: { grid: { display: false } }, y: { grid: { color: 'rgba(0,0,0,0.05)' } } }
                 }
             });
         }
 
-        // TICKERS & CALCULATIONS
-        function updateLiveTickers() {
+        // ================= TICKERS =================
+        function updateLiveTickers(prevPrice) {
             const formatted = formatNumber(AppState.liveGoldPrice);
-            document.getElementById('ticker-price').innerText = `${formatted} تومان`;
+            const priceEl = document.getElementById('ticker-price');
+            priceEl.innerText = `${formatted} تومان`;
             document.getElementById('chart-current-price').innerText = `${formatted} تومان`;
             document.getElementById('piggy-gram-price-display').innerText = `${formatted} تومان`;
             document.getElementById('ticker-mazne').innerText = formatNumber(AppState.liveGoldPrice * 4.33);
+
+            if (prevPrice !== undefined) {
+                const changeEl = document.getElementById('ticker-change');
+                if (AppState.liveGoldPrice > prevPrice) {
+                    priceEl.classList.remove('flash-down'); void priceEl.offsetWidth; priceEl.classList.add('flash-up');
+                    changeEl.className = 'text-emerald-400 font-bold text-[11px] bg-emerald-950/70 px-2 py-0.5 rounded-md border border-emerald-800/50 transition-all';
+                    changeEl.innerText = '(+' + Math.abs(((AppState.liveGoldPrice - prevPrice) / prevPrice) * 100).toFixed(2) + '٪) ▲';
+                } else if (AppState.liveGoldPrice < prevPrice) {
+                    priceEl.classList.remove('flash-up'); void priceEl.offsetWidth; priceEl.classList.add('flash-down');
+                    changeEl.className = 'text-red-400 font-bold text-[11px] bg-red-950/70 px-2 py-0.5 rounded-md border border-red-800/50 transition-all';
+                    changeEl.innerText = '(-' + Math.abs(((AppState.liveGoldPrice - prevPrice) / prevPrice) * 100).toFixed(2) + '٪) ▼';
+                }
+                if (goldChartInstance) {
+                    const d = goldChartInstance.data;
+                    d.datasets[0].data.push(AppState.liveGoldPrice);
+                    d.datasets[0].data.shift();
+                    goldChartInstance.update('none');
+                }
+            }
             updateHomeSavingsCalculator();
+            renderProducts(document.querySelector('.category-btn.active')?.dataset.cat || 'all');
         }
 
-        function formatNumber(num) {
-            return new Intl.NumberFormat('fa-IR').format(Math.round(num));
-        }
+        function formatNumber(num) { return new Intl.NumberFormat('fa-IR').format(Math.round(num)); }
 
-        // AUTHENTICATION
-        function openLoginModal() {
-            document.getElementById('login-modal').classList.remove('hidden');
-        }
-
-        function closeLoginModal() {
-            document.getElementById('login-modal').classList.add('hidden');
-        }
+        // ================= AUTHENTICATION =================
+        function openLoginModal() { document.getElementById('login-modal').classList.remove('hidden'); }
+        function closeLoginModal() { document.getElementById('login-modal').classList.add('hidden'); }
 
         function processLogin() {
             const phone = document.getElementById('user-phone-input').value.trim();
-            if (!phone || phone.length < 10) {
-                alert('لطفاً شماره همراه معتبر وارد کنید.');
-                return;
-            }
+            if (!phone || phone.length < 10) { showToast('لطفاً شماره همراه معتبر وارد کنید.', 'error'); return; }
 
             AppState.currentUser = { phone: phone, goldWeight: 0.000 };
             closeLoginModal();
             updateUserAuthUI();
+            updateGoalRing();
 
             if (phone === AppState.adminPhone) {
                 document.getElementById('admin-nav-link').classList.remove('hidden');
-                alert('خوش آمدید مدیر گرامی! پنل مدیریت فعال شد.');
+                showToast('خوش آمدید مدیر گرامی! پنل مدیریت فعال شد.', 'success');
             } else {
-                alert(`ورود با موفقیت انجام شد.`);
+                showToast('ورود با موفقیت انجام شد. خوش آمدید!', 'success');
             }
         }
 
@@ -1271,15 +1517,20 @@
             const container = document.getElementById('user-auth-btn-container');
             if (AppState.currentUser) {
                 container.innerHTML = `
-                    <div class="flex items-center gap-2 bg-gold-50 border border-gold-200 px-3 py-1.5 rounded-xl text-xs font-bold text-gray-800">
-                        <i class="fa-solid fa-user-check text-gold-600"></i>
+                    <div class="flex items-center gap-2 bg-white/10 border border-gold-500/30 px-3 py-1.5 rounded-xl text-xs font-bold text-white">
+                        <i class="fa-solid fa-user-check text-gold-400"></i>
                         <span>${AppState.currentUser.phone}</span>
                     </div>
                 `;
             }
         }
 
-        // PIGGY BANK LOGIC
+        // ================= PIGGY BANK LOGIC =================
+        function quickPreset(amount) {
+            document.getElementById('buy-toman-input').value = amount;
+            calculatePiggyBuyFromToman();
+        }
+
         function calculatePiggyBuy() {
             const weight = parseFloat(document.getElementById('buy-weight-input').value) || 0;
             const total = weight * AppState.liveGoldPrice;
@@ -1299,7 +1550,7 @@
         function submitPiggyBankPurchase() {
             if (!AppState.currentUser) { openLoginModal(); return; }
             if (!AppState.tempPiggyBuy || AppState.tempPiggyBuy.weight <= 0) {
-                alert('لطفاً مقدار معتبری برای خرید وارد کنید.');
+                showToast('لطفاً مقدار معتبری برای خرید وارد کنید.', 'error');
                 return;
             }
 
@@ -1309,23 +1560,17 @@
             document.getElementById('receipt-modal').classList.remove('hidden');
         }
 
-        function closeReceiptModal() {
-            document.getElementById('receipt-modal').classList.add('hidden');
-        }
+        function closeReceiptModal() { document.getElementById('receipt-modal').classList.add('hidden'); }
 
         function confirmSubmitReceipt() {
             const receiptData = {
-                id: Date.now(),
-                userPhone: AppState.currentUser.phone,
-                weight: AppState.tempPiggyBuy.weight,
-                amount: AppState.tempPiggyBuy.total,
-                status: 'pending'
+                id: Date.now(), userPhone: AppState.currentUser.phone,
+                weight: AppState.tempPiggyBuy.weight, amount: AppState.tempPiggyBuy.total, status: 'pending'
             };
-
             AppState.pendingReceipts.push(receiptData);
             closeReceiptModal();
             renderAdminPanel();
-            alert('رسید شما برای ادمین ارسال شد.');
+            showToast('رسید شما برای ادمین ارسال شد و در انتظار تایید است.', 'success');
         }
 
         function updateUserWalletDisplay() {
@@ -1333,9 +1578,22 @@
             document.getElementById('user-gold-weight').innerText = AppState.currentUser.goldWeight.toFixed(3);
             const val = AppState.currentUser.goldWeight * AppState.liveGoldPrice;
             document.getElementById('user-gold-value').innerText = `${formatNumber(val)} تومان`;
+            updateGoalRing();
         }
 
-        // SHOP LOGIC
+        function updateGoalRing() {
+            const circumference = 2 * Math.PI * 19;
+            const ring = document.getElementById('goal-ring');
+            const text = document.getElementById('goal-progress-text');
+            if (!ring) return;
+            const weight = AppState.currentUser ? AppState.currentUser.goldWeight : 0;
+            const pct = Math.min(weight / AppState.goalGrams, 1);
+            ring.style.strokeDasharray = circumference;
+            ring.style.strokeDashoffset = circumference - pct * circumference;
+            text.innerText = `${Math.round(pct * 100)}٪ تا هدف ۵ گرمی`;
+        }
+
+        // ================= SHOP LOGIC =================
         function renderProducts(category = 'all') {
             const grid = document.getElementById('products-grid');
             if (!grid) return;
@@ -1343,28 +1601,27 @@
 
             const filtered = category === 'all' ? AppState.products : AppState.products.filter(p => p.category === category);
 
-            filtered.forEach(p => {
+            filtered.forEach((p, idx) => {
                 const itemPrice = (p.weight * AppState.liveGoldPrice) * (1 + p.fee / 100);
                 grid.innerHTML += `
-                    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition duration-300 overflow-hidden flex flex-col justify-between">
+                    <div class="lux-card reveal in bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col justify-between" style="--i:${idx}">
                         <div>
-                            <div class="h-48 overflow-hidden relative">
-                                <img src="${p.img}" class="w-full h-full object-cover">
-                                <span class="absolute top-3 right-3 bg-gray-900/80 text-white text-[10px] px-2.5 py-1 rounded-full font-bold">کد: ${p.code}</span>
+                            <div class="h-48 overflow-hidden relative group">
+                                <img src="${p.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                ${p.tag ? `<span class="absolute top-3 left-3 bg-gold-500 text-onyx text-[10px] px-2.5 py-1 rounded-full font-black shadow">${p.tag}</span>` : ''}
+                                <span class="absolute top-3 right-3 bg-onyx/80 text-white text-[10px] px-2.5 py-1 rounded-full font-bold">کد: ${p.code}</span>
                             </div>
                             <div class="p-4 space-y-2">
                                 <h4 class="font-bold text-gray-900 text-sm">${p.title}</h4>
                                 <div class="flex justify-between text-xs text-gray-500">
                                     <span>وزن: <strong>${p.weight} گرم</strong></span>
-                                    <span>اجرت: <strong>${p.fee}%</strong></span>
+                                    <span>اجرت: <strong>${p.fee}٪</strong></span>
                                 </div>
-                                <div class="text-gold-700 font-black text-sm pt-2">
-                                    قیمت تقریبی: ${formatNumber(itemPrice)} تومان
-                                </div>
+                                <div class="text-gold-700 font-black text-sm pt-2">قیمت تقریبی: ${formatNumber(itemPrice)} تومان</div>
                             </div>
                         </div>
                         <div class="p-4 pt-0">
-                            <button onclick="addToCart(${p.id})" class="w-full bg-gold-50 text-gold-700 hover:bg-gold-500 hover:text-white border border-gold-200 font-bold py-2.5 rounded-xl transition text-xs flex items-center justify-center gap-2">
+                            <button onclick="addToCart(${p.id})" class="btn-shimmer w-full bg-gold-50 text-gold-700 hover:bg-gold-500 hover:text-white border border-gold-200 font-bold py-2.5 rounded-xl transition text-xs flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-cart-plus"></i>
                                 افزودن به سبد خرید
                             </button>
@@ -1375,6 +1632,16 @@
         }
 
         function filterShopCategory(cat) {
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active', 'gold-gradient', 'text-onyx', 'shadow-md');
+                btn.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-200');
+            });
+            const target = [...document.querySelectorAll('.category-btn')].find(b => b.getAttribute('onclick').includes(`'${cat}'`));
+            if (target) {
+                target.classList.add('active', 'gold-gradient', 'text-onyx', 'shadow-md');
+                target.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-200');
+                target.dataset.cat = cat;
+            }
             renderProducts(cat);
         }
 
@@ -1383,29 +1650,29 @@
             if (item) {
                 AppState.cart.push(item);
                 updateCartUI();
-                alert(`"${item.title}" به سبد خرید اضافه شد.`);
+                showToast(`«${item.title}» به سبد خرید اضافه شد.`, 'success');
             }
         }
 
         function updateCartUI() {
-            document.getElementById('cart-badge').innerText = AppState.cart.length;
+            const badge = document.getElementById('cart-badge');
+            badge.innerText = AppState.cart.length;
+            badge.classList.remove('animate-ping'); void badge.offsetWidth;
+
             const container = document.getElementById('cart-items-container');
             if (!container) return;
             container.innerHTML = '';
 
-            let totalW = 0;
-            let totalP = 0;
+            let totalW = 0, totalP = 0;
 
             if (AppState.cart.length === 0) {
-                container.innerHTML = `<div class="bg-white p-8 rounded-2xl text-center text-gray-400 text-sm">سبد خرید شما خالی است.</div>`;
+                container.innerHTML = `<div class="bg-white p-10 rounded-2xl text-center text-gray-400 text-sm border border-dashed border-gray-200"><i class="fa-solid fa-bag-shopping text-3xl mb-3 text-gold-200"></i><div>سبد خرید شما خالی است.</div></div>`;
             } else {
                 AppState.cart.forEach((item, index) => {
                     const price = (item.weight * AppState.liveGoldPrice) * (1 + item.fee / 100);
-                    totalW += item.weight;
-                    totalP += price;
-
+                    totalW += item.weight; totalP += price;
                     container.innerHTML += `
-                        <div class="bg-white p-4 rounded-2xl border border-gray-100 flex items-center justify-between gap-4">
+                        <div class="lux-card bg-white p-4 rounded-2xl border border-gray-100 flex items-center justify-between gap-4">
                             <img src="${item.img}" class="w-16 h-16 rounded-xl object-cover">
                             <div class="flex-1 space-y-1">
                                 <h4 class="font-bold text-sm text-gray-900">${item.title}</h4>
@@ -1424,37 +1691,28 @@
             document.getElementById('cart-total-price').innerText = `${formatNumber(totalP)} تومان`;
         }
 
-        function removeFromCart(index) {
-            AppState.cart.splice(index, 1);
-            updateCartUI();
-        }
+        function removeFromCart(index) { AppState.cart.splice(index, 1); updateCartUI(); showToast('کالا از سبد خرید حذف شد.', 'info'); }
 
-        // INQUIRY & ADMIN
+        // ================= INQUIRY & ADMIN =================
         function requestInquiryFromAdmin() {
             if (!AppState.currentUser) { openLoginModal(); return; }
-            if (AppState.cart.length === 0) { alert('سبد خرید خالی است.'); return; }
+            if (AppState.cart.length === 0) { showToast('سبد خرید خالی است.', 'error'); return; }
 
-            const inquiry = {
-                id: Date.now(),
-                userPhone: AppState.currentUser.phone,
-                itemCount: AppState.cart.length,
-                status: 'pending'
-            };
-
+            const inquiry = { id: Date.now(), userPhone: AppState.currentUser.phone, itemCount: AppState.cart.length, status: 'pending' };
             AppState.pendingInquiries.push(inquiry);
             renderAdminPanel();
-            alert('نوتیفیکیشن استعلام موجودی برای ادمین ارسال شد.');
+            showToast('استعلام موجودی برای ادمین ارسال شد.', 'success');
         }
 
         function renderAdminPanel() {
             const inqList = document.getElementById('admin-inquiries-list');
             if (inqList) {
-                inqList.innerHTML = '';
+                inqList.innerHTML = AppState.pendingInquiries.length ? '' : `<p class="text-gray-400 text-center py-4">فعلاً استعلامی ثبت نشده است.</p>`;
                 AppState.pendingInquiries.forEach(inq => {
                     inqList.innerHTML += `
                         <div class="p-3 bg-gray-50 rounded-xl border border-gray-200 space-y-2">
                             <div class="flex justify-between"><strong>کاربر: ${inq.userPhone}</strong> <span>تعداد: ${inq.itemCount} آیتم</span></div>
-                            <button onclick="approveInquiry(${inq.id})" class="w-full bg-emerald-600 text-white font-bold py-1.5 rounded-lg text-xs">تایید موجودی و قیمت</button>
+                            <button onclick="approveInquiry(${inq.id})" class="w-full bg-emerald-600 hover:bg-emerald-700 transition text-white font-bold py-1.5 rounded-lg text-xs">تایید موجودی و قیمت</button>
                         </div>
                     `;
                 });
@@ -1462,17 +1720,16 @@
 
             const recList = document.getElementById('admin-receipts-list');
             if (recList) {
-                recList.innerHTML = '';
-                AppState.pendingReceipts.forEach(rec => {
-                    if (rec.status === 'pending') {
-                        recList.innerHTML += `
-                            <div class="p-3 bg-gray-50 rounded-xl border border-gray-200 space-y-2">
-                                <div>کاربر: <strong>${rec.userPhone}</strong></div>
-                                <div>وزن: <strong>${rec.weight.toFixed(3)} گرم</strong> (${formatNumber(rec.amount)} تومان)</div>
-                                <button onclick="approveReceipt(${rec.id})" class="w-full bg-gold-500 text-white font-bold py-1.5 rounded-lg text-xs">تایید و شارژ کیف پول</button>
-                            </div>
-                        `;
-                    }
+                const pending = AppState.pendingReceipts.filter(r => r.status === 'pending');
+                recList.innerHTML = pending.length ? '' : `<p class="text-gray-400 text-center py-4">رسید جدیدی موجود نیست.</p>`;
+                pending.forEach(rec => {
+                    recList.innerHTML += `
+                        <div class="p-3 bg-gray-50 rounded-xl border border-gray-200 space-y-2">
+                            <div>کاربر: <strong>${rec.userPhone}</strong></div>
+                            <div>وزن: <strong>${rec.weight.toFixed(3)} گرم</strong> (${formatNumber(rec.amount)} تومان)</div>
+                            <button onclick="approveReceipt(${rec.id})" class="w-full bg-gold-500 hover:bg-gold-600 transition text-white font-bold py-1.5 rounded-lg text-xs">تایید و شارژ کیف پول</button>
+                        </div>
+                    `;
                 });
             }
         }
@@ -1481,15 +1738,16 @@
             const inq = AppState.pendingInquiries.find(i => i.id === inqId);
             if (inq) {
                 inq.status = 'approved';
-                alert('استعلام تایید شد.');
+                showToast('استعلام تایید شد.', 'success');
                 const area = document.getElementById('checkout-action-area');
                 if (area) {
                     area.innerHTML = `
-                        <button onclick="openCheckoutModal()" class="w-full gold-gradient text-gray-900 font-black py-4 rounded-xl shadow-lg text-sm">
+                        <button onclick="openCheckoutModal()" class="btn-shimmer w-full gold-gradient text-onyx font-black py-4 rounded-xl shadow-lg text-sm">
                             تکمیل خرید و پرداخت
                         </button>
                     `;
                 }
+                renderAdminPanel();
             }
         }
 
@@ -1502,7 +1760,7 @@
                     updateUserWalletDisplay();
                 }
                 renderAdminPanel();
-                alert('طلا به کیف پول کاربر اضافه شد.');
+                showToast('طلا به کیف پول کاربر اضافه شد.', 'success');
             }
         }
 
@@ -1511,7 +1769,7 @@
             if (newCard) {
                 AppState.adminCardNumber = newCard;
                 document.getElementById('display-admin-card').innerText = newCard;
-                alert('شماره کارت جدید ذخیره شد.');
+                showToast('شماره کارت جدید ذخیره شد.', 'success');
             }
         }
 
@@ -1524,10 +1782,12 @@
             const img = document.getElementById('new-prod-img').value || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80';
 
             if (title && code && weight) {
-                AppState.products.push({ id: Date.now(), code, title, category, weight, fee: fee || 0, img });
+                AppState.products.push({ id: Date.now(), code, title, category, weight, fee: fee || 0, img, tag: 'جدید' });
                 renderProducts();
                 renderHomeFeaturedProducts();
-                alert('محصول جدید اضافه شد.');
+                showToast('محصول جدید با موفقیت اضافه شد.', 'success');
+            } else {
+                showToast('لطفاً نام، کد و وزن محصول را وارد کنید.', 'error');
             }
         }
 
@@ -1541,28 +1801,24 @@
 
             if (method === 'wallet') {
                 if (!AppState.currentUser || AppState.currentUser.goldWeight < totalWeightNeeded) {
-                    alert('موجودی کیف پول طلای شما کافی نیست! ابتدا قلک طلا را شارژ کنید.');
+                    showToast('موجودی کیف پول طلای شما کافی نیست! ابتدا قلک طلا را شارژ کنید.', 'error');
                     return;
                 }
                 AppState.currentUser.goldWeight -= totalWeightNeeded;
                 updateUserWalletDisplay();
             }
 
-            alert('سفارش شما با موفقیت ثبت گردید.');
+            showToast('سفارش شما با موفقیت ثبت گردید. 🎉', 'success');
             AppState.cart = [];
             updateCartUI();
             closeCheckoutModal();
         }
 
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text);
-            alert('شماره کارت کپی شد.');
-        }
-
+        function copyToClipboard(text) { navigator.clipboard.writeText(text); showToast('شماره کارت کپی شد.', 'success'); }
         function copyInviteLink() {
             const val = document.getElementById('invite-link-input').value;
             navigator.clipboard.writeText(val);
-            alert('لینک دعوت کپی شد.');
+            showToast('لینک دعوت کپی شد.', 'success');
         }
     </script>
 </body>
